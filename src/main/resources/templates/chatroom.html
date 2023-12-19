@@ -1,0 +1,165 @@
+<!DOCTYPE>
+<html>
+<head>
+<title>聊天室</title>
+<link rel="stylesheet" href="./css/bootstrap.min.css" />
+<script src="./js/jquery-1.12.3.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<style>
+body {
+	margin-top: 5px;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">当前登录用户</h3>
+					</div>
+					<div class="panel-body">
+						<div class="list-group">
+							<a href="#" class="list-group-item">你好，<span id="user"></span></a>
+							<a href="logout" class="list-group-item">退出</a>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-primary" id="online">
+					<div class="panel-heading">
+						<h3 class="panel-title">其他在线用户</h3>
+					</div>
+					<div class="panel-body">
+						<div class="list-group" id="users"></div>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">消息发送</h3>
+					</div>
+					<div class="panel-body">
+						<input type="text" class="form-control" id="msg" /><br>
+						<button id="broadcast" type="button" class="btn btn-primary">发送</button>
+						&nbsp;&nbsp;
+						<button id="send" type="button" class="btn btn-primary">私聊发送</button>
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title" id="talktitle"></h3>
+						</div>
+						<div class="panel-body">
+							<div class="well" id="log-container" style="height:400px;overflow-y:scroll"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		var username;
+		var uid;
+	
+		$(document).ready(function() {
+			// 指定websocket路径
+			var websocket;
+			$.get("/currentuser", function(data) {
+				username = data.username;
+				uid = data.uid;
+				$("#user").html(username);
+				if ('WebSocket' in window) { // 浏览器支持 WebSocket
+					websocket = new WebSocket("ws://localhost:8080/webSocket/" + username); // 打开一个 web socket
+				}
+				websocket.onmessage = function(event) {
+					var data = JSON.parse(event.data);
+					if (data.to == 0) { //上线消息
+						if (data.text != username) {
+							$("#users").append('<a href="#" onclick="talk(this)" class="list-group-item">' + data.text + '</a>');
+							$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + data.date + "</label><div class='text-success'>" + data.text + "上线了" + "</div></div><br>");
+							scrollToBottom();
+						}
+					} else if (data.to == -2) { //下线消息
+						if (data.text != username) {
+							$("#users > a").remove(":contains('" + data.text + "')");
+							$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + data.date + "</label><div class='text-success'>" + data.text + "下线了" + "</div></div><br>");
+							scrollToBottom();
+						}
+					} else { // 普通消息
+						$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + data.date + "</label><div class='text-success'>" + data.text + "</div></div><br>");
+						scrollToBottom();
+					}
+				};
+				// 加载当前用户
+				$.post("/onlineusers?currentuser=" + username, function(data) {
+					for (var i = 0; i < data.length; i++) {
+						$("#users").append('<a href="#" onclick="talk(this)" class="list-group-item">' + data[i] + '</a>');
+					}
+				});
+			});
+	
+			// 发送
+			$("#broadcast").click(function() {
+				var data = {};
+				data["from"] = username;
+				data["to"] = -1;
+				data["text"] = $("#msg").val();
+				websocket.send(JSON.stringify(data)); // 使用 send() 方法发送数据
+				$("#msg").val("");
+			});
+	
+			// 私聊发送
+			$("#send").click(function() {
+				if ($("body").data("to") == undefined) {
+					alert("请选择聊天对象");
+					return false;
+				}
+				var data = {};
+				data["from"] = username;
+				data["to"] = $("body").data("to");
+				data["text"] = $("#msg").val();
+				websocket.send(JSON.stringify(data)); // 使用 send() 方法发送数据
+				// 单独发送给某人的，不会广播，所以自己这里要手动加上
+				$("#log-container").append("<div class='bg-success'><label class='text-info'>我&nbsp;" + new Date().format("yyyy-MM-dd hh:mm:ss") + "</label><div class='text-info'>" + $("#msg").val() + "</div></div><br>");
+				scrollToBottom();
+				$("#msg").val("");
+			});
+	
+		});
+	
+		function talk(a) {
+			$("#talktitle").text("与" + a.innerHTML + "的聊天");
+			$("body").data("to", a.innerHTML);
+		}
+		
+		// 滚动条滚动到最低部
+		function scrollToBottom() {
+			var div = document.getElementById('log-container');
+			div.scrollTop = div.scrollHeight;
+		}
+	
+		Date.prototype.format = function(fmt) {
+			var o = {
+				"M+" : this.getMonth() + 1, //月份 
+				"d+" : this.getDate(), //日 
+				"h+" : this.getHours(), //小时 
+				"m+" : this.getMinutes(), //分 
+				"s+" : this.getSeconds(), //秒 
+				"q+" : Math.floor((this.getMonth() + 3) / 3), //季度 
+				"S" : this.getMilliseconds() //毫秒 
+			};
+			if (/(y+)/.test(fmt)) {
+				fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+			}
+			for (var k in o) {
+				if (new RegExp("(" + k + ")").test(fmt)) {
+					fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+				}
+			}
+			return fmt;
+		}
+	</script>
+
+</body>
+</html>
