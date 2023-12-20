@@ -1875,7 +1875,7 @@ pre code {
 .col-md-20 {
     position: relative;
     min-height: 1px;
-    top: -310px;
+    top: -400px;
     left: 125%;
     /* height: 10%; */
     width: 275%;
@@ -7261,4 +7261,37 @@ button.close {
 .topnav a.active {
     background-color: #04AA6D;
     color: white;
+}
+
+#bubble_btn {
+    opacity: 1;
+    transition: 2.5s;
+}
+
+    #bubble_btn:link, #bubble_btn:visited {
+        background-image: url(../picture/bubble.png);
+        margin-top: 3%;
+        margin-left: 15%;
+        background-size: cover;
+        color: #446ebb;
+        padding: 70px 60px 60px 65px;
+        font-size: 26px;
+        text-align: center;
+        display: inline-block;
+    }
+
+    #bubble_btn:hover, #bubble_btn:active {
+        background-image: url(../picture/bubble.png);
+        background-size: cover;
+        color: snow;
+        padding: 85px 80px 70px 80px;
+        font-size: 32px;
+        margin:-12px;
+        text-align: center;
+        margin-left: 14%;
+    }
+
+#panel_send{
+    margin-top: -100px;
+
 }
