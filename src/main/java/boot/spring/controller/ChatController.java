@@ -52,4 +52,16 @@ public class ChatController {
 		User user = (User) httpSession.getAttribute("user");
 		return user;
 	}
+
+
+	//myself
+	@RequestMapping("/welcome")
+	public String welcome() {
+		return "login";
+	}
+
+	@RequestMapping("/history")
+	public String history() {
+		return "order";
+	}
 }
