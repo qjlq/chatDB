@@ -28,6 +28,7 @@ public class ChatController {
 	/**
 	 * 在线用户
 	 */
+	//加载当前用户
 	@RequestMapping("/onlineusers")
 	@ResponseBody
 	public Set<String> onlineusers(@RequestParam("currentuser") String currentuser) {

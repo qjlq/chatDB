@@ -6,6 +6,7 @@ import boot.spring.po.User;
 
 @Mapper
 public interface LoginMapper {
+	//在数据库中获得姓名
 	User getpwdbyname(String name);
 
 	User getnamebyid(long id);

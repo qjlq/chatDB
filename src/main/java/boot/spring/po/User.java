@@ -1,5 +1,6 @@
 package boot.spring.po;
 
+//该文件就是定义变量名字和方法
 public class User {
 	private Long uid;
 	private String username;
