@@ -1,0 +1,131 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>regist</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <style>
+    .image__img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+    }
+    .image {
+      position: relative;
+      width: 100%;
+    }
+    .image__overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      color: #ffffff;
+      font-family: 'Quickand', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.25s;
+    }
+  </style>
+</head>
+<body>
+<div id="wrap">
+  <div id="top_content">
+    <div id="header">
+      <div id="rightheader">
+      </div>
+      <div id="topheader">
+        <h1 id="title">
+        </h1>
+      </div>
+      <div id="navigation">
+      </div>
+    </div>
+    <div id="content">
+      <img class="image__img" src="https://img.tukuppt.com/bg_grid/00/23/05/M0o0om7MHQ.jpg!/fh/350"
+           alt="Bricks">
+      <div class="image__overlay">
+        <h1>
+          注册
+        </h1>
+        <form th:action="@{/register}" method="post">
+          <table cellpadding="0" cellspacing="0" border="0"
+                 class="form_table">
+            <tr>
+              <td valign="middle" align="right">
+                用户名:
+              </td>
+              <td valign="middle" align="left">
+                <input type="text" class="inputgri" name="user_name" />
+              </td>
+            </tr>
+            <tr>
+              <td valign="middle" align="right">
+                真实姓名:
+              </td>
+              <td valign="middle" align="left">
+                <input type="text" class="inputgri" name="real_name" />
+              </td>
+            </tr>
+            <tr>
+              <td valign="middle" align="right">
+                密码:
+              </td>
+              <td valign="middle" align="left">
+                <input type="password" class="inputgri" name="password" />
+              </td>
+            </tr>
+            <tr>
+              <td valign="middle" align="right">
+                性别:
+              </td>
+              <td valign="middle" align="left">
+                男
+                <input type="radio" class="inputgri" name="sex" value="男" checked="checked"/>
+                女
+                <input type="radio" class="inputgri" name="sex" value="女"/>
+              </td>
+            </tr>
+            <tr>
+              <td valign="middle" align="right">
+                手机号码:
+              </td>
+              <td valign="middle" align="left">
+                <input type="text" class="inputgri" name="phone_number" />
+              </td>
+            </tr>
+            <tr>
+              <td valign="middle" align="right">
+                备注:
+              </td>
+              <td valign="middle" align="left">
+                <input type="text" class="inputgri" name="note" />
+              </td>
+            </tr>
+            <tr>
+              <td valign="middle" align="right">
+                验证码:
+                <img id="num" th:src="@{/code}" />
+                <a href="javascript:;" onclick="document.getElementById('num').src = '/code?'+(new Date()).getTime()">换一张</a>
+              </td>
+              <td valign="middle" align="left">
+                <input type="text" class="inputgri" name="code" />
+              </td>
+            </tr>
+          </table>
+          <p>
+            <input type="submit" class="button" value="注册 &raquo;" />
+            <input type="button" class="button" onclick="location.href='/login'" value="取消 &raquo;" />
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

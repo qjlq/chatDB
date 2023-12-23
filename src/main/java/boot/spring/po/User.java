@@ -1,40 +1,28 @@
 package boot.spring.po;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+//必须要有Lombok依赖
+@Data                   //代替了Setter和Getter
+@AllArgsConstructor     //代替了有参函数构造器
+@NoArgsConstructor      //代替了无参函数构造器
+@ToString               //代替了重写ToString
 //该文件就是定义变量名字和方法
 public class User {
-	private Long uid;
+	private String uid;
 	private String username;
 	private String password;
+	private String sex;
+	private String phone;
+	private int is_admin=0;
+	private int is_delete=0;
+	private String create_time;
 
-	public User() {
-	}
-
-	public User(Long uid, String username) {
+	public User(String uid, String username) {
 		this.uid = uid;
 		this.username = username;
-	}
-
-	public Long getUid() {
-		return uid;
-	}
-
-	public void setUid(Long uid) {
-		this.uid = uid;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 }
