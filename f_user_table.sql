@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `f_user`;
-CREATE TABLE `f_user`(
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user`(
 	`uid` varchar(40) PRIMARY KEY,
   `username` varchar(40) NOT NULL,
   `password` varchar(40) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE `f_user`(
 	`create_time` VARCHAR(32)
 )CHARSET=utf8;
 
-INSERT INTO `f_user` (`uid`, `username`, `password`, `sex`, `phone`, `is_admin`, `id_delete`, `create_time`) VALUES
+INSERT INTO `user` (`uid`, `username`, `password`, `sex`, `phone`, `is_admin`, `is_delete`, `create_time`) VALUES
 ('admin1', 'admin', 'admin', '男', '13709620408', 1, 0, NULL),
-('visitor1', 'visitor', '男', '18858362363', 0, 1, NULL);
+('visitor1', 'visitor','visitor', '男', '18858362363', 0, 1, NULL);
 
