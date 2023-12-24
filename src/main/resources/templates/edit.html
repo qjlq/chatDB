@@ -6,7 +6,30 @@
     <link rel="icon" href="../imgs/favicon.ico" type="image/x-icon">
     <link media="all" href="./css/release_product.css" type="text/css" rel="stylesheet">
     <link media="all" href="./css/index.css" type="text/css" rel="stylesheet">
+    <style>
+        h1{
+        text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        function uploadAvatar(){
+            //1 创建文件读取对象
+            var reader=new FileReader();
+
+            //文件存储在file表单元素的files属性中，它是一个数组
+            //没有返回值，但是读取完毕后，将读取结果存储在对象的result中
+            var fil=document.getElementById("file1").files;
+            reader.readAsDataURL(fil[0]);
+
+            //当读取成功后触发
+            reader.onload=function(){
+                document.getElementById("img1").src=reader.result;
+            };
+        }
+
+    </script>
 </head>
+
 <body>
     <div class="topnav">
         <a href="/welcome">主页</a>
@@ -16,96 +39,107 @@
         <a href="/profile">个人页面</a>
     </div>
     <div class="container">
-        <div class="main center">
-            <div class="wave-fluid"></div>
-            <div class="release-title">发布商品出售</div>
-            <form action="publish" id="publish-form" method="post">
-                <div class="form-wr">
-                    <input type="hidden" name="id" value="${goods.id}">
-                    <input id="photo" type="hidden" name="photo" value="${goods.photo}" class="required" tips="请上传图片">
-                    <div id="show-img" class="form-item l goods-title" style="height:100px;">
-                        <div class="form-key">
-                            <span>基金图片</span>
-                        </div>
-                        <div class="form-value">
-                            <div class="form-input-wr">
-                                <img id="uploaded-img" src="/photo/view?filename=${goods.photo}" width="100px"
-                                     height="100px">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-item l goods-title">
-                        <div class="form-key">
-                            <span>选择商品图片</span></div>
-                        <div class="form-value">
-                            <div class="form-input-wr">
-                                <input type="file" id="uploadFile"/>
-                            </div>
-                        </div>
-                    </div>
+<!--        <div class="main center">-->
+<!--            <div class="wave-fluid"></div>-->
+<!--            <h1>商品编辑界面</h1>-->
+<!--            <div class="release-title">发布商品出售</div>-->
+<!--            <form action="publish" id="publish-form" method="post">-->
+<!--                <div class="form-wr">-->
+<!--                    <input type="hidden" name="id" value="${goods.id}">-->
+<!--                    <input id="photo" type="hidden" name="photo" value="${goods.photo}" class="required" tips="请上传图片">-->
+<!--                    <div id="show-img" class="form-item l goods-title" style="height:100px;">-->
+<!--                        <div class="form-key">-->
+<!--                            <span>基金图片</span>-->
+<!--                        </div>-->
+<!--                        <div class="form-value">-->
+<!--                            <div class="form-input-wr">-->
+<!--                                <img id="uploaded-img" src="/photo/view?filename=${goods.photo}" width="100px"-->
+<!--                                     height="100px">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-item l goods-title">-->
+<!--                        <div class="form-key">-->
+<!--                            <span>选择商品图片</span></div>-->
+<!--                        <div class="form-value">-->
+<!--                            <div class="form-input-wr">-->
+<!--                                <input type="file" id="uploadFile"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="form-item l goods-title">
-                        <div class="form-key">
-                            <span>商品名称</span></div>
-                        <div class="form-value">
-                            <div class="form-input-wr">
-                                <input id="name" name="name" placeholder="最多18个字" maxlength="18" value="${goods.name}"
-                                       type="text" class="required" tips="请填写基金名称"></div>
-                        </div>
-                    </div>
+<!--                    <div class="form-item l goods-title">-->
+<!--                        <div class="form-key">-->
+<!--                            <span>商品名称</span></div>-->
+<!--                        <div class="form-value">-->
+<!--                            <div class="form-input-wr">-->
+<!--                                <input id="name" name="name" placeholder="最多18个字" maxlength="18" value="${goods.name}"-->
+<!--                                       type="text" class="required" tips="请填写基金名称"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="form-item xl goods-desc">
-                        <div class="form-key">
-                            <span>商品详细信息</span></div>
-                        <div class="form-value">
-                            <div class="form-input-wr">
-                                <textarea name="content" id="desc" placeholder="填写至少15个字" class="required"
-                                          tips="请填写详情描述">${goods.content}</textarea>
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="form-item xl goods-desc">-->
+<!--                        <div class="form-key">-->
+<!--                            <span>商品详细信息</span></div>-->
+<!--                        <div class="form-value">-->
+<!--                            <div class="form-input-wr">-->
+<!--                                <textarea name="content" id="desc" placeholder="填写至少15个字" class="required"-->
+<!--                                          tips="请填写详情描述">${goods.content}</textarea>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="form-item l goods-price">
-                        <div class="form-key">
-                            <span>起购价</span>
-                        </div>
-                        <div class="form-value">
-                            <div class="form-input-wr">
-                                <input class="price required" id="price" name="price" value="${goods.price}"
-                                       type="number" tips="请填写基金起购价">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-item l goods-title">
-                        <div class="form-key">
-                            <span>选择产品</span>
-                        </div>
-                        <div class="form-value">
-<!--                            <input type="hidden" id="ptype" name="ptype" >-->
-                            <select id="addProductId" name="addProductId" class="form-input-wr" >
-                                <option value="">---请选择产品---</option>
-                                <option value="toy">玩具</option>
-                                <option value="cloths">服装</option>
-                                <option value="electronic">电子产品</option>
-<!--                                <option th:each="a:${wxProduct}" th:value="${a.id}" th:text="${a.productName}"></option>-->
-                            </select>
+<!--                    <div class="form-item l goods-price">-->
+<!--                        <div class="form-key">-->
+<!--                            <span>起购价</span>-->
+<!--                        </div>-->
+<!--                        <div class="form-value">-->
+<!--                            <div class="form-input-wr">-->
+<!--                                <input class="price required" id="price" name="price" value="${goods.price}"-->
+<!--                                       type="number" tips="请填写基金起购价">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-item l goods-title">-->
+<!--                        <div class="form-key">-->
+<!--                            <span>选择产品</span>-->
+<!--                        </div>-->
+<!--                        <div class="form-value">-->
+<!--&lt;!&ndash;                            <input type="hidden" id="ptype" name="ptype" >&ndash;&gt;-->
+<!--                            <select id="addProductId" name="addProductId" class="form-input-wr" >-->
+<!--                                <option value="">-&#45;&#45;请选择产品-&#45;&#45;</option>-->
+<!--                                <option value="toy">玩具</option>-->
+<!--                                <option value="cloths">服装</option>-->
+<!--                                <option value="electronic">电子产品</option>-->
+<!--&lt;!&ndash;                                <option th:each="a:${wxProduct}" th:value="${a.id}" th:text="${a.productName}"></option>&ndash;&gt;-->
+<!--                            </select>-->
 
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary button_submit">确定</button>
-                    <a href="/chat">
-                        <button type="button" class="btn btn-primary button_submit">取消</button>
-                    </a>
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <center><button type="submit" class="btn btn-primary button_submit">确定</button>-->
+<!--                    <a href="/chat">-->
+<!--                        <button type="button" class="btn btn-primary button_submit">取消</button>-->
+<!--                    </a>-->
+<!--                    </center>-->
 
-                </div>
-            </form>
-        </div>
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            学号：<input type="text" name="sno"/><br/>
+            姓名：<input type="text" name="sname"/><br/>
+            照片：<img id="img1" src="/test/default.png" style="height:100px;width:100px;border-radius:50px"><br><!--src="/test/default.png"使用了虚拟路径，不然访问不到-->
+            <input id="file1" type="file" name="spicture" onchange="uploadAvatar()"/><br/>
+            <input type="submit" value="提交"/>
+        </form>
+        <br>
+        <a href="/download">下载1.jpg</a>
+
+
     </div>
 
     <script>
-        $("#addProductId").change(function(){
-
-        })
 
     </script>
 
