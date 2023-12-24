@@ -48,7 +48,7 @@ public class Login {
 	}
 
 	// 注册方法
-	@PostMapping("/register1")
+	@PostMapping("/register")
 	public String register(User user, String code, HttpSession session) {
 		String sessionCode = (String)session.getAttribute("code"); // 生成的验证码
 		// 忽略大小写, 比较用户输入的验证码与生成的验证码
