@@ -20,4 +20,8 @@
 	<insert id="save" parameterType="boot.spring.po.User">
 		insert into user values (#{uid}, #{username}, #{password}, #{sex}, #{phone}, #{is_admin}, #{is_delete}, #{create_time})
 	</insert>
+
+	<select id="selectId" parameterType="String" resultType="String">
+		select uid from `user` where username = #{username}
+	</select>
 </mapper>

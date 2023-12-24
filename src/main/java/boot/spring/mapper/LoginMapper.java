@@ -10,6 +10,4 @@ public interface LoginMapper {
 
 	void save(User user);
 	User getpwdbyname(String name);
-
-	User getnamebyid(long id);
 }
