@@ -13,11 +13,12 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 
 import boot.spring.po.Message;
-
+@Service
 @ServerEndpoint("/webSocket/{username}")
 @Component
 public class WebSocketServer {

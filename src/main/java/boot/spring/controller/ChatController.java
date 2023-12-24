@@ -22,7 +22,7 @@ import boot.spring.service.WebSocketServer;
 @Controller
 public class ChatController {
 
-	@Autowired
+	//@Autowired //重复注入导致报错？ Error creating bean with name
 	LoginService loginservice;
 	
 	/**
