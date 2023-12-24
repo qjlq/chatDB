@@ -47,4 +47,9 @@ public class HistoryController {
     public String myProduct() {
         return "myProduct";
     }
+
+    @RequestMapping("/edit_goods")
+    public String edit_goods(){
+        return "edit";
+    }
 }
