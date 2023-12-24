@@ -20,7 +20,7 @@
   </div>
 
   <div id="order-container">
-    <div class="textDiv" id="order2">
+    <!-- <div class="textDiv" id="order2">
       <img src="orderPicture/computer.jpg" alt="sorry, picture missing" width="300" height="200" style="float:left">
       <div class="order_content_container">
         <div class="product_number">
@@ -44,44 +44,44 @@
           aaaaaaaa
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
-</div>
+  </div>
 
 
-<script>
-  var username;
-var uid;
-$(document).ready(function() {
-  $.get("/currentuser", function(data) {
-    username = data.username;
-    uid = data.uid;
-<!--                window.alert(uid);-->
-            // 加载当前用户的购买记录
-            $.post("/orderhistory?currentuserid=" + uid, function(data) {
-                for (var i = 0; i < data.length; i++) {
-                    var order_id = 'product_number' + (i+1);
-                    $("#order-container").append('<div class="textDiv" id="' + order_id + '"> </div>');
-                    $("#"+order_id).append('<img src="orderPicture/' + data[i].picture + '" alt="sorry, picture is missing" width="300" height="200" style="float:left">');
-                    var order_content_container = '<div class="order_content_container">';
-                    order_content_container += '<div class="product_number"><b>商品编号：</b>' + data[i].pid + '</div>';
-                    order_content_container += '<div class="product_name"><b>商品名称：</b>' + data[i].product_name + '</div>';
-                    order_content_container += '<div class="product_quantity"><b>购买数量：</b>' + data[i].Pquantity + '</div>';
-                    order_content_container += '<div class="product_price"><b>订单总价：</b>' + data[i].total + '</div>';
-                    order_content_container += '<div class="product_description"><b>商品描述：</b>' + data[i].description + '</div>';
-                    order_content_container += '</div>';
-                    $("#"+order_id).append(order_content_container);
-<!--                        window.alert(data[i]);-->
-<!--                        window.alert(data[i].picture);-->
+  <script>
+    var username;
+    var uid;
+    $(document).ready(function () {
+      $.get("/currentuser", function (data) {
+        username = data.username;
+        uid = data.uid;
+        <!--                window.alert(uid);-->
+        // 加载当前用户的购买记录
+        $.post("/producthistory?currentuserid=" + uid, function (data) {
+          for (var i = 0; i < data.length; i++) {
+            var order_id = 'product_number' + (i + 1);
+            $("#order-container").append('<div class="textDiv" id="' + order_id + '"> </div>');
+            $("#" + order_id).append('<img src="orderPicture/' + data[i].picture + '" alt="sorry, picture is missing" width="300" height="200" style="float:left">');
+            var order_content_container = '<div class="order_content_container">';
+            order_content_container += '<div class="product_number"><b>商品编号：</b>' + data[i].pid + '</div>';
+            order_content_container += '<div class="product_name"><b>商品名称：</b>' + data[i].product_name + '</div>';
+            order_content_container += '<div class="product_quantity"><b>购买数量：</b>' + data[i].Pquantity + '</div>';
+            order_content_container += '<div class="product_price"><b>订单总价：</b>' + data[i].total + '</div>';
+            order_content_container += '<div class="product_description"><b>商品描述：</b>' + data[i].description + '</div>';
+            order_content_container += '</div>';
+            $("#" + order_id).append(order_content_container);
+< !--window.alert(data[i]); -->
+< !--window.alert(data[i].picture); -->
                 }
-<!--                    window.alert(data.length);-->
+< !--window.alert(data.length); -->
 
             });
-  });
+      });
     });
 
-</script>
+  </script>
 
 
 </body>

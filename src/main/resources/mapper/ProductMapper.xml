@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boot.spring.mapper.ProductMapper">
+    <!--从数据库中获取信息给po.product文件-->
+    <resultMap type="boot.spring.po.Product" id="productMap">
+        <id column="pid" property="pid"></id>
+        <result column="description" property="description" />
+        <result column="price" property="total" />
+        <result column="quantity" property="Pquantity" />
+        <result column="product_name" property="product_name" />
+        <result column="picture" property="picture" />
+    </resultMap>
+    <!--从数据库中获取信息-->
+    <select id="getProductByUid" parameterType="String"
+            resultMap="productMap">
+        SELECT product.pid, product.product_name, product.picture, product.description, product.quantity, product.price
+        FROM product
+        WHERE buy_uid = #{userid};
+    </select>
+</mapper>

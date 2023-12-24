@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import boot.spring.po.Order;
+import boot.spring.po.Product;
 import boot.spring.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import boot.spring.po.User;
 import boot.spring.service.OrderService;
+import boot.spring.service.ProductService;
 import boot.spring.service.WebSocketServer;
 
 import boot.spring.po.User;
@@ -29,6 +31,9 @@ import boot.spring.po.User;
 public class HistoryController {
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    ProductService productService;
 
     @RequestMapping("/chat")
     public String chat() {
@@ -40,6 +45,13 @@ public class HistoryController {
     @ResponseBody
     public  List<Order> orderhistory(@RequestParam("currentuserid") String currentuserid, HttpSession httpSession) {
         List<Order> orders = orderService.getHistoryByUid(currentuserid);
+        return orders; //返回结果
+    }
+
+    @RequestMapping("/producthistory")
+    @ResponseBody
+    public  List<Product> producthistory(@RequestParam("currentuserid") String currentuserid, HttpSession httpSession) {
+        List<Product> orders = productService.getHistoryByUid(currentuserid);
         return orders; //返回结果
     }
 
