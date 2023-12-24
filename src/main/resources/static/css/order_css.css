@@ -1,12 +1,15 @@
 html {
     font-family: sans-serif;
     -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%
+    -ms-text-size-adjust: 100%;
+    scroll-behavior: smooth;
 }
 
 body {
     background-image: url(../picture/chat_background.jpg);
     background-size: 100%;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 /*历史订单*/
@@ -36,11 +39,11 @@ body {
 .stat {
     height: 0;
     position:relative;
-    left:75%;
-    top:-115px;
-    border: 18px solid transparent;
+    left:73%;
+    top:-132px;
+    border: 35px solid transparent;
     transform: rotate(45deg) translateY(-160px) translateX(8px);
-    font-size: 14px;
+    font-size: 21px;
     width: 100px;
     text-align: center;
     color: white;
@@ -51,7 +54,12 @@ body {
 }
 
 .green {
-    border-bottom-color: lawngreen;
+    border-bottom-color: rgba(61, 140, 98, 1);
+}
+
+
+.red {
+    border-bottom-color: rgba(255, 140, 98, 1);
 }
 
 .head {
@@ -87,7 +95,7 @@ body {
     color: white;
 }
 
-#containerBtn {
+.containerBtn {
     position: relative;
     width: 30%;
     height: 100px;
@@ -95,7 +103,7 @@ body {
     left:60%;
 }
 
-    #containerBtn button {
+    .containerBtn button {
         padding: 15px 25px;
         font-size: 24px;
         text-align: center;
@@ -108,11 +116,11 @@ body {
         box-shadow: 0 9px #999;
     }
 
-        #containerBtn button:hover {
+        .containerBtn button:hover {
             background-color: #24478f;
         }
 
-        #containerBtn button:active {
+        .containerBtn button:active {
             background-color: #24478f;
             box-shadow: 0 5px #666;
             transform: translateY(4px);
@@ -122,9 +130,25 @@ body {
     position: absolute;
     left: 35%;
     cursor: pointer;
+    top:-25px;
 }
 
 .myBtnReceiveHidden {
     visibility:hidden;
-    left: 200%;
+}
+
+.containerBtn_received{
+    left:70%;
+    top:-335px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px 30px;
+    border-radius:10px;
+    width:85px;
+    text-align: center;
+    visibility:hidden;
+}
+
+.containerBtn_received b{
+    font-size: 18px;
+    color:rgba(190, 230, 247, 1);
 }
