@@ -100,7 +100,7 @@
                         order_content_container += '</div>';
                         $("#"+order_id).append(order_content_container);
                         $("#"+order_id).append('<div class="stat blue" id="order_stat'+(i+1) + '"> 未收货</div>');
-                        $("#"+order_id).append('<div class="containerBtn"><button id="' + 'myBtnReceive' + (i+1) + '"class="myBtnReceive">确认收货</button></div>');
+                        $("#"+order_id).append('<div class="containerBtn"><button id="' + 'myBtnReceive' + (i+1) + '"class="myBtnReceive" oid="' + data[i].oid + '">确认收货</button></div>');
                         $("#"+order_id).append('<div class="containerBtn_received" id="myReceived'+ (i+1) + '"><b>已收货</b></div>');
                         var btn_id = 'myBtnReceive' + (i+1);
                         var received_id = 'myReceived' + (i+1);
@@ -108,15 +108,13 @@
                         switch(data[i].Status){
                             case "unreceived":
                                 document.getElementById(btn_id).addEventListener("click", function(e){
-                                    window.alert(e.target);
                                     var target = e.target;
-                                    window.alert(target.className);
-                                    document.getElementById(btn_id).className += " myBtnReceiveHidden";
-                                    document.getElementById(received_id).style.visibility = "visible";
-                                    document.getElementById(stat_id).className = "stat green";
-                                    document.getElementById(stat_id).innerHTML = "已收货";
-                                    window.alert(i);
-                                    window.alert(btn_id);
+                                    var index = target.id.slice(-1);
+                                    window.alert(target.getAttribute('oid'));
+                                    document.getElementById('myBtnReceive' + index).className += " myBtnReceiveHidden";
+                                    document.getElementById('myReceived' + index).style.visibility = "visible";
+                                    document.getElementById('order_stat' + index).className = "stat green";
+                                    document.getElementById('order_stat' + index).innerHTML = "已收货";
                                 });
                                 break;
                             case "received":
