@@ -43,4 +43,8 @@ public class HistoryController {
         return orders; //返回结果
     }
 
+    @RequestMapping("/myProduct")
+    public String myProduct() {
+        return "myProduct";
+    }
 }
