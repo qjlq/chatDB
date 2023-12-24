@@ -5,6 +5,7 @@ import java.util.Date;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class Message {
+
 	// 发送者name
 	public String from;
 	// 接收者name 0上线消息 -1给所有人 -2下线消息
@@ -14,6 +15,10 @@ public class Message {
 	// 发送时间
 	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	public Date date;
+
+
+
+
 
 	public String getFrom() {
 		return from;
@@ -47,4 +52,13 @@ public class Message {
 		this.date = date;
 	}
 
+	@Override
+	public String toString() {
+		return "Message{" +
+				"from='" + from + '\'' +
+				", to='" + to + '\'' +
+				", text='" + text + '\'' +
+				", date=" + date +
+				'}';
+	}
 }
