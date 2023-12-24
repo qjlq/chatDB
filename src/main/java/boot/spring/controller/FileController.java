@@ -31,9 +31,11 @@ public class FileController {
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
         System.out.println(("上传的后缀名为：" + suffixName));
         // 文件上传后的路径
-        String filePath = "D://test//";
+        System.out.println("用户的当前工作目录:"+System.getProperty("user.dir"));
+        String filePath = System.getProperty("user.dir") + "/src/main/resources/static/orderPicture/";
         // 解决中文问题，liunx下中文路径，图片显示问题
         // fileName = UUID.randomUUID() + suffixName;
+        System.out.println(filePath);
         File dest = new File(filePath + fileName);
         // 检测是否存在目录
         if (!dest.getParentFile().exists()) {
