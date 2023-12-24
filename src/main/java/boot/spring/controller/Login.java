@@ -26,37 +26,46 @@ import java.util.UUID;
 @Controller
 public class Login {
 	@Resource
-	LoginService loginservice;   //调用boot.spring.service.LoginService接口
+	LoginService loginservice; // 调用boot.spring.service.LoginService接口
 
-	//接收在login的html上登录的username和password
+	// 接收在login的html上登录的username和password
 	@RequestMapping("/loginvalidate")
-	//@RequestParam是将请求参数绑定到控制器的方法参数上
-	public String loginvalidate(@RequestParam("username") String username, @RequestParam("password") String pwd, HttpSession httpSession) {
+	// @RequestParam是将请求参数绑定到控制器的方法参数上
+	public String loginvalidate(@RequestParam("username") String username, @RequestParam("password") String pwd,
+			HttpSession httpSession) {
 		if (username == null) {
 			return "/";
 		}
-		User user = loginservice.getUserByName(username);    //调用LoginServiceImpl方法获得名字
-		String realpwd = user.getPassword();           //在po.User中获得密码
-		if (realpwd != null && pwd.equals(realpwd)) {      //密码匹对，成功运行以下语句
-			user.setPassword("NULL");
-			//用户信息存到httpSession中
-			httpSession.setAttribute("user", user);
-			return "chatroom";   //进入到这个html上
-		} else {
-			return "loginfail";
-		}			
+		User user = loginservice.getUserByName(username); // 调用LoginServiceImpl方法获得名字
+		try {
+			String realpwd = user.getPassword();
+			// 在po.User中获得密码
+			if (realpwd != null && pwd.equals(realpwd)) { // 密码匹对，成功运行以下语句
+				user.setPassword("NULL");
+				// 用户信息存到httpSession中
+				httpSession.setAttribute("user", user);
+				return "chatroom"; // 进入到这个html上
+			} else if (realpwd == null) {
+				return "userNull";
+			} else {
+				return "loginfail";
+			}
+		} catch (Exception e) {
+			return "userNull"; //用户不存在时返回
+		}
+
 	}
 
 	// 注册方法
 	@PostMapping("/register")
 	public String register(User user, String code, HttpSession session) {
-		String sessionCode = (String)session.getAttribute("code"); // 生成的验证码
+		String sessionCode = (String) session.getAttribute("code"); // 生成的验证码
 		// 忽略大小写, 比较用户输入的验证码与生成的验证码
-		if (sessionCode.equalsIgnoreCase(code) && user.getPhone().length()==11) { // 输入正确
+		if (sessionCode.equalsIgnoreCase(code) && user.getPhone().length() == 11) { // 输入正确
 			Date date = new Date();
-			SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :HH:mm:ss");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd :HH:mm:ss");
 			user.setCreate_time(dateFormat.format(date));
-			user.setUid(UUID.randomUUID().toString());   //是javaJDK提供的一个自动生成主键的方法
+			user.setUid(UUID.randomUUID().toString()); // 是javaJDK提供的一个自动生成主键的方法
 			loginservice.register(user); // 注册
 			System.out.println("注册成功");
 			return "redirect:/index"; // 注册成功跳转到登录界面
@@ -77,15 +86,16 @@ public class Login {
 		ServletOutputStream os = response.getOutputStream();
 		ImageIO.write(image, "png", os);
 	}
-	@RequestMapping("/")           //第一次接收登陆界面，去到login的html
+
+	@RequestMapping("/") // 第一次接收登陆界面，去到login的html
 	public String login() {
 		return "login";
 	}
 
-	@RequestMapping("/logout")         //接收退出登录的所展示的界面处理
+	@RequestMapping("/logout") // 接收退出登录的所展示的界面处理
 	public String logout(HttpSession httpSession) {
-		httpSession.removeAttribute("user");              //移除httpSession上登录的账户
-		return "login";          //进入到这个html上
+		httpSession.removeAttribute("user"); // 移除httpSession上登录的账户
+		return "login"; // 进入到这个html上
 	}
-	
+
 }
