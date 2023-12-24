@@ -12,6 +12,7 @@ import boot.spring.po.User;
 import boot.spring.service.LoginService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 //保证方法内多个数据库操作要么同时成功，要么同时失败
 @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 5)
@@ -36,6 +37,16 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public void register(User user) {
 		loginmapper.save(user);
+	}
+
+	@Override
+	public User ManageLogin(String username, String password) {
+		return loginmapper.ManageLogin(username, password);
+	}
+
+	@Override
+	public List<User> findAll() {
+		return loginmapper.findAll();
 	}
 
 }

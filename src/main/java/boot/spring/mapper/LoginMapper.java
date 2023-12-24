@@ -3,6 +3,9 @@ package boot.spring.mapper;
 import org.apache.ibatis.annotations.Mapper;
 
 import boot.spring.po.User;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface LoginMapper {
@@ -10,4 +13,8 @@ public interface LoginMapper {
 
 	void save(User user);
 	User getpwdbyname(String name);
+
+	User ManageLogin(@Param("username") String name, @Param("password") String password);
+
+	List<User> findAll();
 }
