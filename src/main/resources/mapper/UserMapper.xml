@@ -24,4 +24,16 @@
 	<select id="selectId" parameterType="String" resultType="String">
 		select uid from `user` where username = #{username}
 	</select>
+
+	<!--管理员登录-->
+	<select id="ManageLogin" resultType="boot.spring.po.User">
+		select * from user
+		where username=#{username} and password=#{password}
+	</select>
+
+	<!--查询所有-->
+	<select id="findAll" resultType="boot.spring.po.User">
+		select *
+		from user
+	</select>
 </mapper>

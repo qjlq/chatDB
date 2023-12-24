@@ -39,12 +39,17 @@ public class Login {
 		User user = loginservice.getUserByName(username); // 调用LoginServiceImpl方法获得名字
 		try {
 			String realpwd = user.getPassword();
+			User login = loginservice.ManageLogin(username, pwd);
 			// 在po.User中获得密码
-			if (realpwd != null && pwd.equals(realpwd)) { // 密码匹对，成功运行以下语句
+			if (realpwd != null && pwd.equals(realpwd) && login.getIs_delete() == 0 && login.getIs_admin() == 0) { // 密码匹对，成功运行以下语句
 				user.setPassword("NULL");
 				// 用户信息存到httpSession中
 				httpSession.setAttribute("user", user);
 				return "chatroom"; // 进入到这个html上
+			}else if(login != null && login.getIs_admin() == 1 && login.getIs_delete() == 0){
+				httpSession.setAttribute("manager", login);
+				System.out.println("管理员登录成功");
+				return "redirect:/findAll";
 			} else if (realpwd == null) {
 				return "userNull";
 			} else {
@@ -66,6 +71,7 @@ public class Login {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd :HH:mm:ss");
 			user.setCreate_time(dateFormat.format(date));
 			user.setUid(UUID.randomUUID().toString()); // 是javaJDK提供的一个自动生成主键的方法
+			System.out.println(user);
 			loginservice.register(user); // 注册
 			System.out.println("注册成功");
 			return "redirect:/index"; // 注册成功跳转到登录界面
