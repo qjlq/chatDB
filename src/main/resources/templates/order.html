@@ -80,11 +80,11 @@
     <script>
     	var username;
 		var uid;
-		$(document).ready(function() {
+	    $(document).ready(function() {
 			$.get("/currentuser", function(data) {
 				username = data.username;
 				uid = data.uid;
-<!--                window.alert(uid);-->
+                //window.alert(uid);
                 // 加载当前用户的购买记录
                 $.post("/orderhistory?currentuserid=" + uid, function(data) {
                     for (var i = 0; i < data.length; i++) {

@@ -51,11 +51,11 @@
       $.get("/currentuser", function(data) {
         username = data.username;
         uid = data.uid;
-        window.alert(uid);
-        window.alert(data.length);
+        // window.alert(uid);
+        // window.alert(data.length);
               // 加载当前用户的购买记录
         $.post("/producthistory?currentuserid=" + uid, function(data) {
-          window.alert(data.length);
+          // window.alert(data.length);
                   for (var i = 0; i < data.length; i++) {
                       var order_id = 'products' + (i+1);
                       $("#product-container").append('<div class="textDiv" id="' + order_id + '"> </div>');
@@ -98,7 +98,7 @@
                               break;
                       }
 
-  window.alert(data[i]);
+  // window.alert(data[i]);
 <!--                        window.alert(data[i].picture);-->
                   }
 <!--                    window.alert(data.length);-->
