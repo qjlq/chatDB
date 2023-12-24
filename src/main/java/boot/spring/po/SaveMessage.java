@@ -8,9 +8,9 @@ public class SaveMessage {
     public String uid;
 
     // 发送的文本
-    public String text;
+    public String chat_data;
 
-    public String time;
+    public String chat_time;
 
     public SaveMessage() {
     }
@@ -18,8 +18,8 @@ public class SaveMessage {
     public SaveMessage(String cid, String uid, String text, String time) {
         this.cid = cid;
         this.uid = uid;
-        this.text = text;
-        this.time = time;
+        this.chat_data = text;
+        this.chat_time = time;
     }
 
     public String getUid() {
@@ -38,20 +38,20 @@ public class SaveMessage {
         this.cid = cid;
     }
 
-    public String getText() {
-        return text;
+    public String getChat_data() {
+        return chat_data;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setChat_data(String chat_data) {
+        this.chat_data = chat_data;
     }
 
-    public String getTime() {
-        return time;
+    public String getChat_time() {
+        return chat_time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setChat_time(String chat_time) {
+        this.chat_time = chat_time;
     }
 
     @Override
@@ -59,8 +59,8 @@ public class SaveMessage {
         return "SaveMessage{" +
                 "cid='" + cid + '\'' +
                 ", uid='" + uid + '\'' +
-                ", text='" + text + '\'' +
-                ", time='" + time + '\'' +
+                ", text='" + chat_data + '\'' +
+                ", time='" + chat_time + '\'' +
                 '}';
     }
 }
