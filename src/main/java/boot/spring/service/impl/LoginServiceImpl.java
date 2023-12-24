@@ -1,6 +1,7 @@
 package boot.spring.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -15,7 +16,9 @@ import javax.annotation.Resource;
 //保证方法内多个数据库操作要么同时成功，要么同时失败
 @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 5)
 //将当前类自动注入到spring容器中
-@Service("loginservice")
+//@Service("loginservice")
+@Service
+@Component
 public class LoginServiceImpl implements LoginService {
 	//调用loginMapper接口，获取name变量数据
 	@Resource

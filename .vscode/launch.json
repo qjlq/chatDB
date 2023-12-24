@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<chart>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "boot.spring.Application",
+            "projectName": "chart",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
