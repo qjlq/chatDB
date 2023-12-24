@@ -3,11 +3,16 @@ package boot.spring.controller;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import boot.spring.po.Message;
+import boot.spring.po.SaveMessage;
+import boot.spring.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +27,8 @@ import boot.spring.service.WebSocketServer;
 @Controller
 public class ChatController {
 
-	//@Autowired //重复注入导致报错？ Error creating bean with name
-	LoginService loginservice;
+	@Resource
+	MessageService messageService;
 	
 	/**
 	 * 在线用户
@@ -54,8 +59,18 @@ public class ChatController {
 		return user;
 	}
 
+	@RequestMapping("/storemessage")
+	@ResponseBody
+	public SaveMessage storemessage(@RequestParam("uid") String uid,
+							 @RequestParam("text") String text,
+							 @RequestParam("time") String time) {
+		String cid = UUID.randomUUID().toString();
+		SaveMessage message = new SaveMessage(cid, uid, text, time);
+		System.out.println(message.toString());
+		messageService.saveMessage(message);
+		return message;
+	}
 
-	//myself
 	@RequestMapping("/welcome")
 	public String welcome() {
 		return "login";
@@ -65,4 +80,6 @@ public class ChatController {
 	public String history() {
 		return "order";
 	}
+
+
 }
