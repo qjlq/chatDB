@@ -50,9 +50,9 @@ public class HistoryController {
 
     @RequestMapping("/producthistory")
     @ResponseBody
-    public  List<Product> producthistory(@RequestParam("currentuserid") String currentuserid, HttpSession httpSession) {
-        List<Product> orders = productService.getHistoryByUid(currentuserid);
-        return orders; //返回结果
+    public  List<Product> producthistory(@RequestParam("currentuserid") String currentuseridp, HttpSession httpSession) {
+        List<Product> products = productService.getHistoryByUid(currentuseridp);
+        return products; //返回结果
     }
 
     @RequestMapping("/myProduct")

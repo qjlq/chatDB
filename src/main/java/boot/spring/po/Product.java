@@ -7,8 +7,8 @@ public class Product {
     public String product_name;
     public String description;
     public String picture;
-    public int quantity;
-    public BigDecimal price;
+    public int Pquantity;
+    public BigDecimal total;
 
     public Product() {
     }
@@ -18,7 +18,7 @@ public class Product {
         this.product_name = product_name;
         this.description = description;
         this.picture = picture;
-        this.quantity = quantity;
-        this.price = price;
+        this.Pquantity = Pquantity;
+        this.total = total;
     }
 }
