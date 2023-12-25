@@ -11,11 +11,12 @@ public class Product {
     public BigDecimal total;
     public int quantity;
     public BigDecimal price;
+    private String lid;
 
     public Product() {
     }
 
-    public Product(String pid, String product_name, String description, String picture, String quantity, String price) {
+    public Product(String pid, String product_name, String description, String picture, String quantity, String price, String lid,String uid) {
         this.pid = pid;
         this.product_name = product_name;
         this.description = description;
@@ -24,5 +25,9 @@ public class Product {
         this.price = new BigDecimal(price);
         this.Pquantity = Pquantity;
         this.total = total;
+        this.lid = lid;
     }
+    public void setlid(String lid) {
+		this.lid = lid;
+	}
 }
