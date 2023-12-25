@@ -84,6 +84,10 @@
 			$.get("/currentuser", function(data) {
 				username = data.username;
 				uid = data.uid;
+                if (uid == undefined){
+                    window.alert("please login");
+                    window.location.href="/";
+                }
 <!--                window.alert(uid);-->
                 // 加载当前用户的购买记录
                 $.post("/orderhistory?currentuserid=" + uid, function(data) {

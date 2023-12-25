@@ -15,8 +15,8 @@
                 ulId.style.display = "block"
             }else{
                 ulId.style.display = "none"
-            }
-        }
+            } 
+        } 
 </script>
 <body>
 <div class="topnav">
@@ -56,5 +56,18 @@
 
     </div>
 </div>
+    <script>
+		var uid;
+        $(document).ready(function() { //调用失败
+            $.get("/currentuser", function(data) {
+                uid = data.uid;
+                window.alert(uid);       
+                if (uid == undefined){
+                    window.alert("please login");
+                    window.location.href="/";
+                }
+            });
+        });  
+    </script>
 </body>
 </html>

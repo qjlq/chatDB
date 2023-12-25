@@ -92,6 +92,10 @@ body {
 			$.get("/currentuser", function(data) {
 				username = data.username;
 				uid = data.uid;
+				if (uid == undefined){
+          			window.alert("please login");
+          			window.location.href="/";
+        		}
 				$("#user").html(username);
 				if ('WebSocket' in window) { // 浏览器支持 WebSocket
 					websocket = new WebSocket("ws://localhost:8080/webSocket/" + username); // 打开一个 web socket

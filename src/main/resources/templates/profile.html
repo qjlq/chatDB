@@ -42,6 +42,10 @@
         //window.alert(uid);
         //window.alert(data.length);
               // 加载当前用户的购买记录
+        if (uid == undefined){
+            window.alert("please login");
+            window.location.href="/";
+        }
         $.post("/profileInfo?currentuserid=" + uid, function(data) {
           //window.alert(data.length);
           //window.alert(data.uid)
@@ -81,22 +85,7 @@
     });
       });
       $("#sub").click(function () {
-        $.get("/currentuser", function(data) {
-        username = data.username;
-        uid = data.uid;
-        if (uid != undefined){
-            document.getElementById("form_uid").setAttribute("value", uid);
-            $("#publish-form").ajaxSubmit(function (data) {
-                alert(data);
-                window.location.href="/chat";
-            });
-        }
-        else{
-            window.alert("please login");
             window.location.href="/";
-        } 
-        })
-
     });
 
   </script>
