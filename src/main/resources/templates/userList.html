@@ -1,0 +1,21 @@
+<!DOCTYPE>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Student</title>
+</head>
+<body>
+<table border="1" align="center">
+  <p align="center">MySQL学生信息表</p>
+  <tr>
+<!--    <th>num</th>-->
+    <th>id</th>
+    <th>username</th>
+  </tr>
+  <tr th:each="user,stat:${userList}">
+<!--    <td th:text="${stat.count}"></td>-->
+    <td th:text="${user.uid}"></td>
+    <td th:text="${user.username}"></td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0
+}
+
+.from {
+    overflow: hidden;
+    position: relative;
+}
+
+.bgc {
+    width: 100%;
+}
+
+.submit {
+    position: absolute;
+    z-index: 9;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    margin-top: 150px;
+    width: 500px;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_title {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 18px;
+}
+
+.form_input {
+    padding: 0 30px;
+    box-sizing: border-box;
+    display: flex;
+    margin-top: 20px;
+}
+
+.inputs {
+    height: 40px;
+    width: 300px;
+    border-radius: 5px;
+    border: none;
+    background-color: #eee;
+    color: #666;
+    padding-left: 20px;
+}
+
+.form_input span {
+    width: 85px;
+    align-self: center;
+}
+
+.btn_submit {
+    align-self: center;
+}
+
+.btn {
+    border: none;
+    width: 80px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    background: #999;
+    margin-top: 40px;
+}
+
+.btn:hover {
+    background: #666;
+}
+
+.back {
+    margin-left: 10px;
+}
+
+.home_href {
+    border: none;
+    width: 80px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    background: #FFD204;
+}
+
+button_exit{
+    background-color:#f66f6a;
+    color:white;
+    width: 400px;
+    height: 45px;
+    border:0;
+    font-size: 16px;
+    box-sizing: content-box;
+    border-radius: 5px;
+}
+button_exit:hover{
+    background-color: #a54b4a;
+}
+
+.niceButton2{
+    position: relative;
+    background-color: rgb(32, 93, 224);
+    border: none;
+    font-size: 28px;
+    color: #ffffff;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    transition-duration: 0.6s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+.niceButton2::after{
+    content: '';
+    background:#53a4f0;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition:all 0.8s;
+}
+.niceButton2:active::after{
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+}
+
+
+
