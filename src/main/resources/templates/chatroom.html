@@ -64,9 +64,7 @@ body {
 						<a href="/edit_goods">
 							<button type="button" class="btn btn-primary">编辑商品</button>
 						</a>
-						<a href="#profile">
-							<button type="button" class="btn btn-primary ">发送商品</button>
-						</a>
+						<button id="show_product" type="button" class="btn btn-primary ">发送商品</button>
 					</div>
 				</div>
 			</div>
@@ -152,7 +150,15 @@ body {
 				scrollToBottom();
 				$("#msg").val("");
 			});
-	
+
+			// 发送商品按钮
+			$("#show_product").click(function() {
+				$.post("/productlist?currentuserid=" + uid, function(data) {
+					for (var i = 0; i < data.length; i++) {
+						$("#link_list").append('<a href="#" class="list-group-item">' + data[i].product_name + '</a>');
+					}
+				});
+			});
 		});
 	
 		function talk(a) {
