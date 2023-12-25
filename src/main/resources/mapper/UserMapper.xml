@@ -18,7 +18,7 @@
         2.parameterType必须和接口方法参数一致
     -->
 	<insert id="save" parameterType="boot.spring.po.User">
-		insert into user values (#{uid}, #{username}, #{password}, #{sex}, #{phone}, #{is_admin}, #{is_delete}, #{create_time})
+		insert into user values (#{uid}, #{username}, #{password}, #{sex}, #{phone}, #{is_admin}, #{is_delete}, #{create_time}, 10000)
 	</insert>
 
 	<select id="selectId" parameterType="String" resultType="String">
