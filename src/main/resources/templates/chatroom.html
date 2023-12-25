@@ -64,13 +64,22 @@ body {
 						<a href="/edit_goods">
 							<button type="button" class="btn btn-primary">编辑商品</button>
 						</a>
-						<a href="#profile">
-							<button type="button" class="btn btn-primary ">发送商品</button>
-						</a>
+						<button id="show_product" type="button" class="btn btn-primary ">发送商品</button>
 					</div>
 				</div>
 			</div>
 			</div>
+		</div>
+	</div>
+	<div id="link_container">
+		<div id = "link-title">
+			<h3>我的所有商品</h3>
+		</div>
+		<div id = "link-body">
+			<div class="listlink-group" id="link_list"></div>
+		</div>
+		<div id = "link-btn">
+			<button id="close_btn">关闭窗口</button>
 		</div>
 	</div>
 	<script>
@@ -141,7 +150,15 @@ body {
 				scrollToBottom();
 				$("#msg").val("");
 			});
-	
+
+			// 发送商品按钮
+			$("#show_product").click(function() {
+				$.post("/productlist?currentuserid=" + uid, function(data) {
+					for (var i = 0; i < data.length; i++) {
+						$("#link_list").append('<a href="#" class="list-group-item">' + data[i].product_name + '</a>');
+					}
+				});
+			});
 		});
 	
 		function talk(a) {

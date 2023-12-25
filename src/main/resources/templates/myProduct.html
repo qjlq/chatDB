@@ -2,17 +2,112 @@
 <html>
 <head>
   <title>login</title>
-  <link rel="stylesheet" href="./css/bootstrap.min.css" />
-
+  <link rel="stylesheet" href="./css/product_css.css" />
+  <script src="./js/jquery-1.12.3.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="topnav">
-  <a href="/welcome">主页</a>
-  <a href="/chat">聊天室</a>
-  <a href="/history">历史订单</a>
-  <a class="active" href="#myProduct">我的商品</a>
-  <a href="/profile">个人页面</a>
+  <div class="topnav">
+    <a href="/welcome">主页</a>
+    <a href="/chat">聊天室</a>
+    <a href="/history">历史订单</a>
+    <a class="active" href="#myProduct">我的商品</a>
+    <a href="/profile">个人页面</a>
+    <!-- <div class="textDiv" id="order2"> -->
+  </div>
 
-</div>
+  <div id="product-container">
+    <!-- <div class="textDiv" id="order2">
+      <img src="orderPicture/computer.jpg" alt="sorry, picture missing" width="300" height="200" style="float:left">
+      <div class="order_content_container">
+        <div class="product_number">
+          <b>商品编号：</b>
+          2021032610194432
+        </div>
+        <div class="product_name">
+          <b>商品名称：</b>
+          电脑
+        </div>
+        <div class="product_quantity">
+          <b>购买数量：</b>
+          2
+        </div>
+        <div class="product_price">
+          <b>订单总价：</b>
+          <b style="color: red;">200.00￥</b>
+        </div>
+        <div class="product_description">
+          <b>商品描述：</b>
+          aaaaaaaa
+        </div>
+      </div>
+    </div> -->
+  </div>
+
+  <script>
+    var username;
+    var uid;
+    $(document).ready(function() {
+      $.get("/currentuser", function(data) {
+        username = data.username;
+        uid = data.uid;
+        //window.alert(uid);
+        //window.alert(data.length);
+              // 加载当前用户的购买记录
+        $.post("/producthistory?currentuserid=" + uid, function(data) {
+          //window.alert(data.length);
+                  for (var i = 0; i < data.length; i++) {
+                      var order_id = 'products' + (i+1);
+                      $("#product-container").append('<div class="textDiv" id="' + order_id + '"> </div>');
+                      $("#" + order_id).append('<img src="orderPicture/' + data[i].picture + '" alt="sorry, picture is missing" width="300" height="200" style="float:left">');
+                      var order_content_container = '<div class="order_content_container">';
+                      order_content_container += '<div class="product_number"><b>商品编号：</b>' + data[i].pid + '</div>';
+                      order_content_container += '<div class="product_name"><b>商品名称：</b>' + data[i].product_name + '</div>';
+                      order_content_container += '<div class="product_quantity"><b>购买数量：</b>' + data[i].Pquantity + '</div>';
+                      order_content_container += '<div class="product_price"><b>订单总价：</b>' + data[i].total + '</div>';
+                      order_content_container += '<div class="product_description"><b>商品描述：</b>' + data[i].description + '</div>';
+                      order_content_container += '</div>';
+                      $("#" + order_id).append(order_content_container);
+                      $("#" + order_id).append('<div class="stat blue" id="order_stat' + (i + 1) + '"> 未发货</div>');
+                      $("#" + order_id).append('<div class="containerBtn"><button id="' + 'myBtnReceive' + (i + 1) + '"class="myBtnReceive" oid="' + data[i].oid + '">确认发货</button></div>');
+                      $("#" + order_id).append('<div class="containerBtn_received" id="myReceived' + (i + 1) + '"><b>已发货</b></div>');
+                      switch(data[i].Status){
+                          case "unreceived":
+                              document.getElementById(btn_id).addEventListener("click", function(e){
+                                  var target = e.target;
+                                  var index = target.id.slice(-1);
+                                  window.alert(target.getAttribute('pid'));
+                                  document.getElementById('myBtnReceive' + index).className += " myBtnReceiveHidden";
+                                  document.getElementById('myReceived' + index).style.visibility = "visible";
+                                  document.getElementById('order_stat' + index).className = "stat green";
+                                  document.getElementById('order_stat' + index).innerHTML = "已发货";
+                              });
+                              break;
+                          case "received":
+                              document.getElementById(btn_id).className += " myBtnReceiveHidden";
+                              document.getElementById(received_id).style.visibility = "visible";
+                              document.getElementById(stat_id).className = "stat green";
+                              document.getElementById(stat_id).innerHTML = "已发货";
+                              break;
+                          case "unsent":
+                              document.getElementById(btn_id).className += " myBtnReceiveHidden";
+                              document.getElementById(received_id).style.visibility = "visible";
+                              document.getElementById(received_id).getElementsByTagName('b')[0].innerHTML = "未发货";
+                              document.getElementById(stat_id).className = "stat red";
+                              document.getElementById(stat_id).innerHTML = "未发货";
+                              break;
+                      }
+
+  //window.alert(data[i]);
+<!--                        window.alert(data[i].picture);-->
+                  }
+<!--                    window.alert(data.length);-->
+
+              });
+    });
+      });
+
+  </script>
 </body>
+
 </html>

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.UUID;
 
 @Controller
@@ -25,7 +26,7 @@ public class ProductController {
     //文件上传
     @RequestMapping("/upload")
     @ResponseBody
-    public String upload(@RequestParam("spicture") MultipartFile file,String name,String content, String price, String quantity) {
+    public String upload(@RequestParam("spicture") MultipartFile file,String name,String content, String price, String quantity, String uid) {
         if (file.isEmpty()) {
             return "empty";
         }
@@ -34,6 +35,7 @@ public class ProductController {
 
         //修改上传完成后的文件名
         String pid = UUID.randomUUID().toString();
+        String lid = UUID.randomUUID().toString();//随机生成lid
         System.out.println(("上传的文件名为：" + fileName));
         // 获取文件的后缀名
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
@@ -46,8 +48,7 @@ public class ProductController {
         fileName = pid + suffixName;
         System.out.println(("后端的文件名为：" + fileName));
         File dest = new File(filePath + fileName);
-
-        Product product = new Product(pid, name, content, fileName, quantity, price);
+        Product product = new Product(pid, name, content, fileName, quantity, price, lid, uid);
 
         // 检测是否存在目录
         if (!dest.getParentFile().exists()) {
@@ -56,7 +57,7 @@ public class ProductController {
         try {
             file.transferTo(dest);
             System.out.println("上传成功!");
-            productService.saveProduct(product);
+            productService.saveProduct(product); //存入新商品
             return "success";
         } catch (IllegalStateException e) {
             e.printStackTrace();
