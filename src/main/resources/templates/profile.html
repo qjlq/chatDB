@@ -12,11 +12,11 @@
 </head>
 <body>
   <div class="topnav">
-    <a href="/welcome">主页</a>
     <a href="/chat">聊天室</a>
     <a href="#history">历史订单</a>
     <a href="/myProduct">我的商品</a>
     <a class="active" href="#profile">个人页面</a>
+    <a href="/empChat/findAllUser">聊天记录</a>
   </div>
   <div id="product-container">
     <!-- <div style="text-align: center">
@@ -42,6 +42,10 @@
         //window.alert(uid);
         //window.alert(data.length);
               // 加载当前用户的购买记录
+        if (uid == undefined){
+            window.alert("please login");
+            window.location.href="/";
+        }
         $.post("/profileInfo?currentuserid=" + uid, function(data) {
           //window.alert(data.length);
           //window.alert(data.uid)
@@ -52,14 +56,23 @@
                       var i = 0;
                       var order_id = 'products' + (i+1);
                       $("#product-container").append('<div class="from_input" id="' + order_id + '"> </div>');
-                      var profile_content_container = '<div class="form" >'
-                        profile_content_container += '<div class="form_title"><b>余额: </b>' + "个人信息" + '</div>';
-                      profile_content_container += '<div class="form_data"><b>账户ID: </b><div class = "form_data">' + data.uid + '</div></div>';
-                      profile_content_container += '<div class="form_data"><b>用户姓名: </b>' + data.username + '</div>';
-                      profile_content_container += '<div class="form_data"><b>性别: </b>' + data.sex + '</div>';
-                      profile_content_container += '<div class="form_data"><b>电话号码: </b>' + data.phone + '</div>';
-                      profile_content_container += '<div class="form_data"><b>创建时间: </b>' + data.create_time + '</div>';
-                      profile_content_container += '<div class="form_data"><b>余额: </b>' + data.money + '</div>';
+                      var profile_content_container = '<div class="submit" >'
+
+                      profile_content_container += '<span class="form_title">个人信息</span>';
+                      // profile_content_container += '<div class="form_input">';
+                      profile_content_container += '<div class="form_input"> <span>账户ID：</span> <div class="form_data"> <b>' + data.uid + '</b></div></div>';
+                      profile_content_container += '<div class="form_input"> <span>用户名字：</span> <div class="form_data"> <b>' + data.username + '</b></div></div>';
+                      profile_content_container += '<div class="form_input"> <span>性别：</span> <div class="form_data"> <b>' + data.sex + '</b></div></div>';
+                      profile_content_container += '<div class="form_input"> <span>电话号码：</span> <div class="form_data"> <b>' + data.phone + '</b></div></div>';
+                      profile_content_container += '<div class="form_input"> <span>创建时间：</span> <div class="form_data"> <b>' + data.creat_time + '</b></div></div>';
+                      profile_content_container += '<div class="form_input"> <span>余额：</span> <div class="form_data"> <b>' + data.money + '</b></div></div>';
+                      // profile_content_container += '</div>'
+
+                      // profile_content_container += '<div class="form_data"><b>用户姓名: </b>' + data.username + '</div>';
+                      // profile_content_container += '<div class="form_data"><b>性别: </b>' + data.sex + '</div>';
+                      // profile_content_container += '<div class="form_data"><b>电话号码: </b>' + data.phone + '</div>';
+                      // profile_content_container += '<div class="form_data"><b>创建时间: </b>' + data.create_time + '</div>';
+                      // profile_content_container += '<div class="form_data"><b>余额: </b>' + data.money + '</div>';
                       profile_content_container += '<div id="sub" style="text-align: center"><a href="/"><button type="button" class="niceButton2" >退出登录</button></a></div>';
                       profile_content_container += '</div>';
                       $("#" + order_id).append(profile_content_container);
@@ -72,22 +85,7 @@
     });
       });
       $("#sub").click(function () {
-        $.get("/currentuser", function(data) {
-        username = data.username;
-        uid = data.uid;
-        if (uid != undefined){
-            document.getElementById("form_uid").setAttribute("value", uid);
-            $("#publish-form").ajaxSubmit(function (data) {
-                alert(data);
-                window.location.href="/chat";
-            });
-        }
-        else{
-            window.alert("please login");
             window.location.href="/";
-        } 
-        })
-
     });
 
   </script>

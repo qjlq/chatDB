@@ -15,12 +15,11 @@
                 ulId.style.display = "block"
             }else{
                 ulId.style.display = "none"
-            }
-        }
+            } 
+        } 
 </script>
 <body>
 <div class="topnav">
-    <a href="/welcome">主页</a>
     <a href="/chat">聊天室</a>
     <a href="/history">历史订单</a>
     <a href="/myProduct">我的商品</a>
@@ -57,5 +56,18 @@
 
     </div>
 </div>
+    <script>
+		var uid;
+        $(document).ready(function() { //调用失败
+            $.get("/currentuser", function(data) {
+                uid = data.uid;
+                window.alert(uid);       
+                if (uid == undefined){
+                    window.alert("please login");
+                    window.location.href="/";
+                }
+            });
+        });  
+    </script>
 </body>
 </html>

@@ -13,7 +13,6 @@ body {
 </head>
 <body>
 	<div class="topnav">
-		<a href="/welcome">主页</a>
 		<a class="active" href="#room">聊天室</a>
 		<a href="/history">历史订单</a>
 		<a href="/myProduct">我的商品</a>
@@ -93,6 +92,10 @@ body {
 			$.get("/currentuser", function(data) {
 				username = data.username;
 				uid = data.uid;
+				if (uid == undefined){
+          			window.alert("please login");
+          			window.location.href="/";
+        		}
 				$("#user").html(username);
 				//获取历史信息
 				$.get("/findHistoryMessage", function(data){

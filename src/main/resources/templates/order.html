@@ -8,11 +8,11 @@
 </head>
 <body>
     <div class="topnav">
-        <a href="/welcome">主页</a>
         <a href="/chat">聊天室</a>
         <a class="active" href="#history">历史订单</a>
         <a href="/myProduct">我的商品</a>
         <a href="/profile">个人页面</a>
+        <a href="/empChat/findAllUser">聊天记录</a>
     </div>
 
 
@@ -84,6 +84,10 @@
 			$.get("/currentuser", function(data) {
 				username = data.username;
 				uid = data.uid;
+                if (uid == undefined){
+                    window.alert("please login");
+                    window.location.href="/";
+                }
 <!--                window.alert(uid);-->
                 // 加载当前用户的购买记录
                 $.post("/orderhistory?currentuserid=" + uid, function(data) {
