@@ -7293,5 +7293,46 @@ button.close {
 
 #panel_send{
     margin-top: -100px;
+}
 
+#link_container{
+    position:absolute;
+    left:65%;
+    background-color:rgba(255, 255, 225, 0.8);
+    top:450px;
+    color:white;
+    border-radius:0px 0px 25px 25px;
+}
+
+#link-title{
+    background-color:rgba(31, 105, 225, 0.8);
+    color:white;
+    padding:10px 40px;
+    border-radius:25px 25px 0px 0px;
+}
+
+#link-body{
+    padding:15px;
+    background-color:rgba(225, 225, 225, 0.5);
+    overflow-y: scroll;
+    height:300px;
+}
+
+#link-btn{
+    padding:15px 55px;
+    background-color:rgba(225, 225, 225, 0.8);
+    border-radius:0px 0px 25px 25px;
+}
+
+#close_btn{
+    padding:10px 25px;
+    color:white;
+    background-color:rgba(31, 105, 225, 0.8);
+    border-radius:10px;
+    transition:all 0.8s;
+}
+
+#close_btn:hover{
+    background-color:rgba(0, 74, 163, 1);
+    transition:all 0.8s;
 }
