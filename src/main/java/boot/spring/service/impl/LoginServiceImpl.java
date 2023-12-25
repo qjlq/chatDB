@@ -44,9 +44,4 @@ public class LoginServiceImpl implements LoginService {
 		return loginmapper.ManageLogin(username, password);
 	}
 
-	@Override
-	public List<User> findAll() {
-		return loginmapper.findAll();
-	}
-
 }

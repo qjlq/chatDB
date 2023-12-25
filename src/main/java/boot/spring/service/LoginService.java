@@ -16,5 +16,4 @@ public interface LoginService {
 
 	User ManageLogin(String username, String password);
 
-	List<User> findAll();
 }

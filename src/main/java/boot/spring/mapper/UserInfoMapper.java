@@ -1,9 +1,10 @@
 package boot.spring.mapper;
 
+import boot.spring.po.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
-import boot.spring.po.UserInfo;
 @Mapper
+
 public interface UserInfoMapper {
     /**
      * 获取用户信息

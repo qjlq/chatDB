@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>提示页面</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+  <style>
+    h1 {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<h1>
+  您添加的用户电话号码格式不对！请重新填写！
+</h1>
+<div id="wrap">
+  <div id="top_content">
+    <div id="header">
+      <div id="rightheader">
+      </div>
+      <div id="topheader">
+      </div>
+      <div id="navigation">
+      </div>
+    </div>
+    <div id="content">
+      <p>
+        <input type="button" class="button" onclick="location.href='/emp/toAdd'" value="返回填写 &raquo;"/>
+      </p>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>
