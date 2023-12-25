@@ -21,8 +21,8 @@ public class UserInfoController {
 
     @RequestMapping("/profileInfo")
     @ResponseBody
-    public UserInfo profile(@RequestParam("userprofileuid") String userprofileuid, HttpSession httpSession){
-        UserInfo userInfo = userInfoService.getHistoryUserUid(userprofileuid);
+    public UserInfo profile(@RequestParam("currentuserid") String currentuserid, HttpSession httpSession){
+        UserInfo userInfo = userInfoService.getHistoryUserUid(currentuserid);
         return userInfo;
     }
 

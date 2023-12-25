@@ -3,6 +3,8 @@
 <head>
   <title>个人页面</title>
   <title>主页</title>
+  <!-- <link rel="stylesheet" href="./css/profile.css" /> -->
+  <!-- <link media="all" href="./css/product_css.css" type="text/css" rel="stylesheet"> -->
   <link rel="stylesheet" href="./css/chat.min.css" />
   <link media="all" href="./css/profile.css" type="text/css" rel="stylesheet">
   <script src="./js/jquery-1.12.3.min.js"></script>
@@ -16,88 +18,80 @@
     <a href="/myProduct">我的商品</a>
     <a class="active" href="#profile">个人页面</a>
   </div>
-
-<!--  <body>-->
-  <div class="from">
-    <img class="bgc" src="./img/imgs42.jpg" alt="">
-    <div class="submit">
-      <span class="form_title">个人信息</span>
-      <div class="form_input">
-        <span>账户ID：</span>
-        <div class = "form_data">
-          <b>456</b>
-        </div>
-      </div>
-      <div class="form_input">
-        <span>姓名：</span>
-        <div class = "form_data">
-          <b>居居侠</b>
-        </div>
-      </div>
-      <div class="form_input">
-        <span>性别:</span>
-        <div class = "form_data">
-          <b>男</b>
-        </div>
-      </div>
-      <div class="form_input">
-        <span>电话：</span>
-        <div class = "form_data">
-          <b>18818382364</b>
-        </div>
-      </div>
-      <div class="form_input">
-        <span>创建时间：</span>
-        <div class = "form_data">
-          <b>2003</b>
-        </div>
-      </div>
-      <div class="form_input">
-        <span>余额：</span>
-        <div class = "form_data">
-          <b>1251</b>
-        </div>
-      </div>
-
-      <div style="text-align: center">
-        <a href="/">
-          <button type="button" class="niceButton2" >退出登录</button>
-        </a>
-      </div>
-
-    </div>
+  <div id="product-container">
+    <!-- <div style="text-align: center">
+      <a href="/">
+        <button type="button" class="niceButton2" >退出登录</button>
+      </a>
+    </div> -->
+    <!-- <center>
+     
+      <input class="btn btn-primary button_submit" type="button" id="sub" name="Submit" value="提交">
+      <a href="/chat">
+          <button type="button" class="niceButton2">退出登录</button>
+      </a>
+    </center> -->
   </div>
-<!--  </body>-->
-
-
   <script>
-    // var username;
-    // var uid;
-    // var sex;
-    // var phone;
-    // var create_time;
-    // var money;
-    // $(document).ready(function (){
-    //   $.get("/userprofileuid", function (data) {
-    //     username = data.username;
-    //     uid = data.uid;
-    //
-    //     $.post("/profileInfo?userprofileuid=" + uid, function (data){
-    //       var user_uid = 'user' +(i+1);
-    //       $("#profile-container").append('<div class="texDiv" id="' + user_uid + '"> </div>');
-    //       var profile_content_container = '<div class="profile_content_container" >'
-    //       profile_content_container += '<div class="profile_uid"><b>账户ID: </b>' + data.uid + '</div>';
-    //       profile_content_container += '<div class="profile_username"><b>用户姓名: </b>' + data.username + '</div>';
-    //       profile_content_container += '<div class="profile_sex"><b>性别: </b>' + data.sex + '</div>';
-    //       profile_content_container += '<div class="profile_phone"><b>电话号码: </b>' + data.phone + '</div>';
-    //       profile_content_container += '<div class="profile_create_time"><b>创建时间: </b>' + data.create_time + '</div>';
-    //       profile_content_container += '<div class="profile_money"><b>余额: </b>' + data.money + '</div>';
-    //       profile_content_container += '</div>';
-    //     })
-    //   })
-    // })
+    var username;
+    var uid;
+    $(document).ready(function() {
+      $.get("/currentuser", function(data1) {
+        username = data1.username;
+        uid = data1.uid;
+        //window.alert(uid);
+        //window.alert(data.length);
+              // 加载当前用户的购买记录
+        $.post("/profileInfo?currentuserid=" + uid, function(data) {
+          //window.alert(data.length);
+          //window.alert(data.uid)
+          //window.alert(data.username)
+          //window.alert(data.sex)
+          //window.alert(user.phone)
+                  for (var j = 0; j < 1; j++) {
+                      var i = 0;
+                      var order_id = 'products' + (i+1);
+                      $("#product-container").append('<div class="from_input" id="' + order_id + '"> </div>');
+                      var profile_content_container = '<div class="form" >'
+                        profile_content_container += '<div class="form_title"><b>余额: </b>' + "个人信息" + '</div>';
+                      profile_content_container += '<div class="form_data"><b>账户ID: </b><div class = "form_data">' + data.uid + '</div></div>';
+                      profile_content_container += '<div class="form_data"><b>用户姓名: </b>' + data.username + '</div>';
+                      profile_content_container += '<div class="form_data"><b>性别: </b>' + data.sex + '</div>';
+                      profile_content_container += '<div class="form_data"><b>电话号码: </b>' + data.phone + '</div>';
+                      profile_content_container += '<div class="form_data"><b>创建时间: </b>' + data.create_time + '</div>';
+                      profile_content_container += '<div class="form_data"><b>余额: </b>' + data.money + '</div>';
+                      profile_content_container += '<div id="sub" style="text-align: center"><a href="/"><button type="button" class="niceButton2" >退出登录</button></a></div>';
+                      profile_content_container += '</div>';
+                      $("#" + order_id).append(profile_content_container);
+
+  //window.alert(data[i]);
+<!--                        window.alert(data[i].picture);-->
+                  }
+
+              });
+    });
+      });
+      $("#sub").click(function () {
+        $.get("/currentuser", function(data) {
+        username = data.username;
+        uid = data.uid;
+        if (uid != undefined){
+            document.getElementById("form_uid").setAttribute("value", uid);
+            $("#publish-form").ajaxSubmit(function (data) {
+                alert(data);
+                window.location.href="/chat";
+            });
+        }
+        else{
+            window.alert("please login");
+            window.location.href="/";
+        } 
+        })
+
+    });
 
   </script>
+  
 
 
 

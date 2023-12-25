@@ -49,7 +49,9 @@ public class Login {
 			}else if(login != null){
 				httpSession.setAttribute("manager", login);
 				System.out.println("管理员登录成功");
-				return "redirect:/findAll";
+				return "redirect:/emp/findAll";
+			} else if (realpwd == null) {
+				return "userNull";
 			} else {
 				return "loginfail";
 			}

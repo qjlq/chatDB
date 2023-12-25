@@ -1,0 +1,101 @@
+<!DOCTYPE>
+<html>
+<head>
+  <title>个人页面</title>
+  <title>主页</title>
+  <link rel="stylesheet" href="./css/chat.min.css" />
+  <link media="all" href="./css/profile.css" type="text/css" rel="stylesheet">
+  <script src="./js/jquery-1.12.3.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="topnav">
+    <a href="/welcome">主页</a>
+    <a href="/chat">聊天室</a>
+    <a href="#history">历史订单</a>
+    <a href="/myProduct">我的商品</a>
+    <a class="active" href="#profile">个人页面</a>
+  </div>
+
+<!--  <body>-->
+  <!-- <div class="from">
+    <img class="bgc" src="./img/imgs42.jpg" alt="">
+    <div class="submit">
+      <span class="form_title">个人信息</span>
+      <div class="form_input">
+        <span>账户ID：</span>
+        <div class = "form_data">
+          <b>456</b>
+        </div>
+      </div>
+      <div class="form_input">
+        <span>姓名：</span>
+        <div class = "form_data">
+          <b>居居侠</b>
+        </div>
+      </div>
+      <div class="form_input">
+        <span>性别:</span>
+        <div class = "form_data">
+          <b>男</b>
+        </div>
+      </div>
+      <div class="form_input">
+        <span>电话：</span>
+        <div class = "form_data">
+          <b>18818382364</b>
+        </div>
+      </div>
+      <div class="form_input">
+        <span>创建时间：</span>
+        <div class = "form_data">
+          <b>2003</b>
+        </div>
+      </div>
+      <div class="form_input">
+        <span>余额：</span>
+        <div class = "form_data">
+          <b>1251</b>
+        </div>
+      </div>
+
+      <div style="text-align: center">
+        <a href="/">
+          <button type="button" class="niceButton2" >退出登录</button>
+        </a>
+      </div>
+
+    </div>
+  </div> -->
+<!--  </body>-->
+
+
+  <script>
+    var username;
+    var uid;
+    $(document).ready(function (){
+      $.get("/currentuser", function (data) {
+        username = data.username;
+        uid = data.uid;
+    
+        $.post("/profileInfo?userprofileuid=" + uid, function (data){
+          $("#profile-container").append('<div class="texDiv" id="' + user_uid + '"> </div>');
+          var profile_content_container = '<div class="profile_content_container" >'
+          profile_content_container += '<div class="profile_uid"><b>账户ID: </b>' + data.uid + '</div>';
+          profile_content_container += '<div class="profile_username"><b>用户姓名: </b>' + data.username + '</div>';
+          profile_content_container += '<div class="profile_sex"><b>性别: </b>' + data.sex + '</div>';
+          profile_content_container += '<div class="profile_phone"><b>电话号码: </b>' + data.phone + '</div>';
+          profile_content_container += '<div class="profile_create_time"><b>创建时间: </b>' + data.create_time + '</div>';
+          profile_content_container += '<div class="profile_money"><b>余额: </b>' + data.money + '</div>';
+          profile_content_container += '</div>';
+        });
+      });
+    });
+
+  </script>
+  
+
+
+
+</body>
+</html>

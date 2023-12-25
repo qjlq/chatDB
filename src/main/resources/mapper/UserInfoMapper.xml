@@ -15,9 +15,9 @@
     <!--从数据库中获取名字-->
     <select id="getUserUid" parameterType="String"
             resultMap="userInfoMap">
-        select username, sex, phone, create_time, money
+        select user.uid, user.username, user.sex, user.phone, user.create_time, user.money
         from user
-        where username=#{username}
+        where user.uid=#{userid}
     </select>
 
 
