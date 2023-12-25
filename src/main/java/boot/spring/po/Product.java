@@ -11,8 +11,8 @@ public class Product {
     public BigDecimal total;
     public int quantity;
     public BigDecimal price;
-    private String lid;
-
+    public String lid;
+    public String uid;
     public Product() {
     }
 
@@ -26,6 +26,7 @@ public class Product {
         this.Pquantity = Pquantity;
         this.total = total;
         this.lid = lid;
+        this.uid = uid;
     }
     public void setlid(String lid) {
 		this.lid = lid;
