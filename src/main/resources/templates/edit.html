@@ -6,6 +6,9 @@
     <link rel="icon" href="../imgs/favicon.ico" type="image/x-icon">
     <link media="all" href="./css/release_product.css" type="text/css" rel="stylesheet">
     <link media="all" href="./css/index.css" type="text/css" rel="stylesheet">
+    <script src="./js/jquery-1.12.3.min.js"></script>
+    <script src="https://malsup.github.io/jquery.form.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
     <style>
         h1{
         text-align: center;
@@ -42,7 +45,7 @@
         <div class="main center">
             <div class="wave-fluid"></div>
             <h1>添加新商品</h1>
-            <form action="/upload" id="publish-form" method="post" enctype="multipart/form-data">
+            <form action="/upload" id="publish-form" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 <div class="form-wr">
                     <input type="hidden" name="id">
                     <input id="photo" type="hidden" name="photo" class="required" tips="请上传图片">
@@ -110,12 +113,13 @@
                             </div>
                         </div>
                     </div>
-                    <center><button type="submit" class="btn btn-primary button_submit">确定</button>
-                    <a href="/chat">
-                        <button type="button" class="btn btn-primary button_submit">取消</button>
-                    </a>
+                    <center>
+<!--                        <button id="sub" type="submit" class="btn btn-primary button_submit">确定</button>-->
+                        <input class="btn btn-primary button_submit" type="button" id="sub" name="Submit" value="提交">
+                        <a href="/chat">
+                            <button type="button" class="btn btn-primary button_submit">取消</button>
+                        </a>
                     </center>
-
                 </div>
             </form>
         </div>
@@ -125,7 +129,11 @@
     </div>
 
     <script>
-
+        $("#sub").click(function () {
+            $("#publish-form").ajaxSubmit(function (data) {
+                alert(data);
+            });
+        });
     </script>
 
 </body>
