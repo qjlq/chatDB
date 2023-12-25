@@ -8,4 +8,20 @@
     <insert id="setProduct" parameterType="boot.spring.po.Product">
         insert into product values (#{pid}, #{product_name}, #{description}, #{picture}, #{quantity}, #{price})
     </insert>
+     <!--从数据库中获取信息给po.product文件-->
+    <resultMap type="boot.spring.po.Product" id="productMap">
+        <id column="pid" property="pid"></id>
+        <result column="description" property="description" />
+        <result column="price" property="total" />
+        <result column="quantity" property="Pquantity" />
+        <result column="product_name" property="product_name" />
+        <result column="picture" property="picture" />
+    </resultMap>
+    <!--从数据库中获取信息-->
+    <select id="getProductByUid" parameterType="String"
+            resultMap="productMap">
+        SELECT product.pid, product.product_name, product.picture, product.description, product.quantity, product.price
+        FROM product,link
+        WHERE link.pid = product.pid AND sell_uid = #{userid};
+    </select>
 </mapper>

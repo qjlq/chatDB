@@ -7,6 +7,8 @@ public class Product {
     public String product_name;
     public String description;
     public String picture;
+    public int Pquantity;
+    public BigDecimal total;
     public int quantity;
     public BigDecimal price;
 
@@ -20,5 +22,7 @@ public class Product {
         this.picture = picture;
         this.quantity = Integer.parseInt(quantity);
         this.price = new BigDecimal(price);
+        this.Pquantity = Pquantity;
+        this.total = total;
     }
 }
