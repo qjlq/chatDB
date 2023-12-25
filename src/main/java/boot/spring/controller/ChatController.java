@@ -81,5 +81,10 @@ public class ChatController {
 		return "order";
 	}
 
+	@RequestMapping("/profile")
+	public String profile(){
+		return "profile";
+	}
+
 
 }

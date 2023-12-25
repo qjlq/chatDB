@@ -11,6 +11,8 @@ public class User {
 	private int is_delete=0;
 	private String create_time;
 
+	private Float money;
+
 	public User() {
 	}
 
@@ -19,7 +21,7 @@ public class User {
 		this.username = username;
 	}
 
-	public User(String uid, String username, String password, String sex, String phone, int is_admin, int is_delete, String create_time) {
+	public User(String uid, String username, String password, String sex, String phone, int is_admin, int is_delete, String create_time, Float money) {
 		this.uid = uid;
 		this.username = username;
 		this.password = password;
@@ -28,6 +30,15 @@ public class User {
 		this.is_admin = is_admin;
 		this.is_delete = is_delete;
 		this.create_time = create_time;
+		this.money = money;
+	}
+
+	public Float getMoney() {
+		return money;
+	}
+
+	public void setMoney(Float money) {
+		this.money = money;
 	}
 
 	public String getUid() {
@@ -106,6 +117,7 @@ public class User {
 				", is_admin=" + is_admin +
 				", is_delete=" + is_delete +
 				", create_time='" + create_time + '\'' +
+				", money=" + money +
 				'}';
 	}
 }

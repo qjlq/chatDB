@@ -29,4 +29,11 @@ public class ProductServicelmpl implements ProductService{
             List<Product> o = productMapper.getProductByUid(uid);
             return o;
         }
+
+        @Override
+        public void saveProduct(Product product) {
+            productMapper.setProduct(product);
+        }
 }
+
+
