@@ -86,5 +86,10 @@ public class ChatController {
 		return "profile";
 	}
 
+	@RequestMapping("/OutputChat")
+	public String OutputChat(){
+		return "Outputchat";
+	}
+
 
 }
