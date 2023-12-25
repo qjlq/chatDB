@@ -13,6 +13,7 @@ public class Product {
     public BigDecimal price;
     public String lid;
     public String uid;
+    public String Status;
     public Product() {
     }
 
