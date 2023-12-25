@@ -47,7 +47,7 @@
             <h1>添加新商品</h1>
             <form action="/upload" id="publish-form" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 <div class="form-wr">
-                    <input type="hidden" name="id">
+                    <input id="form_uid" type="hidden" name="uid" value="">
                     <input id="photo" type="hidden" name="photo" class="required" tips="请上传图片">
                     <div id="show-img" class="form-item l goods-title" style="height:100px;">
                         <div class="form-key">
@@ -129,11 +129,29 @@
     </div>
 
     <script>
-        $("#sub").click(function () {
-            $("#publish-form").ajaxSubmit(function (data) {
-                alert(data);
-            });
+        // $("#sub").click(function () {
+        //     $("#publish-form").ajaxSubmit(function (data) {
+        //         alert(data);
+        //     });
+        //     $.get("/currentuser", function(data) {
+        //         username = data.username;
+        //         uid = data.uid;
+        //     });
+        //     $.ajaxSubmit
+    var username;
+    var uid;
+    $(document).ready(function() {
+      $.get("/currentuser", function(data) {
+        username = data.username;
+        uid = data.uid;
+        document.getElementById("form_uid").setAttribute("value", uid); 
+      })
+    });
+    $("#sub").click(function () {
+        $("#publish-form").ajaxSubmit(function (data) {
+            alert(data);
         });
+    });
     </script>
 
 </body>
