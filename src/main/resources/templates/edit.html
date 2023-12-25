@@ -48,9 +48,6 @@
             <form action="/upload" id="publish-form" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 <div class="form-wr">
                     <input id="form_uid" type="hidden" name="uid" value="">
-                    <!-- <if condition="条件">
-                        <else/>
-                    </if> -->
                     <input id="photo" type="hidden" name="photo" class="required" tips="请上传图片">
                     <div id="show-img" class="form-item l goods-title" style="height:100px;">
                         <div class="form-key">
@@ -157,10 +154,22 @@
       })
     });
     $("#sub").click(function () {
-        $("#publish-form").ajaxSubmit(function (data) {
-            alert(data);
-            window.location.href="/chat";
-        });
+        $.get("/currentuser", function(data) {
+        username = data.username;
+        uid = data.uid;
+        if (uid != undefined){
+            document.getElementById("form_uid").setAttribute("value", uid);
+            $("#publish-form").ajaxSubmit(function (data) {
+                alert(data);
+                window.location.href="/chat";
+            });
+        }
+        else{
+            window.alert("please login");
+            window.location.href="/";
+        } 
+        })
+
     });
     </script>
 </body>
