@@ -20,7 +20,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
         //配置server虚拟路径，handler为前台访问的目录，locations为files相对应的本地路径
-        registry.addResourceHandler("/test/**").addResourceLocations("file:D:\\testgit\\chatDB\\src\\main\\resources\\static\\orderPicture");
+        registry.addResourceHandler("/test/**").addResourceLocations("file:D:\\test\\");
     }
 
 }

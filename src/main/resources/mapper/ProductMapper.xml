@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boot.spring.mapper.ProductMapper">
+    <!--存消息记录-->
+    <!--1.id必须和Mapper（UserDAO）接口方法名一致
+        2.parameterType必须和接口方法参数一致
+    -->
+    <insert id="setProduct" parameterType="boot.spring.po.Product">
+        insert into product values (#{pid}, #{product_name}, #{description}, #{picture}, #{quantity}, #{price})
+    </insert>
+</mapper>
