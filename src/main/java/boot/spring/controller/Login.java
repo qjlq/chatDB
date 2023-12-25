@@ -41,12 +41,12 @@ public class Login {
 			String realpwd = user.getPassword();
 			User login = loginservice.ManageLogin(username, pwd);
 			// 在po.User中获得密码
-			if (realpwd != null && pwd.equals(realpwd)) { // 密码匹对，成功运行以下语句
+			if (realpwd != null && pwd.equals(realpwd) && login.getIs_delete() == 0 && login.getIs_admin() == 0) { // 密码匹对，成功运行以下语句
 				user.setPassword("NULL");
 				// 用户信息存到httpSession中
 				httpSession.setAttribute("user", user);
 				return "chatroom"; // 进入到这个html上
-			}else if(login != null){
+			}else if(login != null && login.getIs_admin() == 1 && login.getIs_delete() == 0){
 				httpSession.setAttribute("manager", login);
 				System.out.println("管理员登录成功");
 				return "redirect:/emp/findAll";

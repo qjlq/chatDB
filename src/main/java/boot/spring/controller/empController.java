@@ -26,7 +26,6 @@ public class empController {
     @RequestMapping("/findAll")
     public String findAll(Model model) {
         List<User> user = empService.findAll();
-        System.out.println(user);
         model.addAttribute("users", user);
         return "/ManageUser";
     }
@@ -34,7 +33,7 @@ public class empController {
     //界面登录
     @GetMapping("userIn")
     public String userIn(){
-        return "redirect:/findAll";
+        return "redirect:/emp/findAll";
     }
 
     //增加
@@ -52,7 +51,7 @@ public class empController {
             user.setCreate_time(dateFormat.format(date));
             user.setUid(UUID.randomUUID().toString());   //是javaJDK提供的一个自动生成主键的方法
             empService.add(user);
-            return "redirect:/findAll";
+            return "redirect:/emp/findAll";
         }else {
             return "/addHint";
         }
@@ -71,7 +70,7 @@ public class empController {
         if (!user1.getUid().equals(user.getUid()) && user.getIs_delete() == 0) {
             user.setIs_delete(1);
             empService.update(user);
-            return "redirect:/findAll";
+            return "redirect:/emp/findAll";
         }else {
             return "/deleteHint";
         }
@@ -96,9 +95,10 @@ public class empController {
         user.setIs_delete(user2.getIs_delete());
         user.setCreate_time(user2.getCreate_time());
         user.setUid(user2.getUid());
+        user.setMoney(user2.getMoney());
         if (user.getPhone().length() == 11 ) {
             empService.update(user);
-            return "redirect:/findAll";
+            return "redirect:/emp/findAll";
         }else {
             model.addAttribute("user", user);
             return "ems/updateHint";
