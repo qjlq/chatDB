@@ -157,7 +157,7 @@
               电话号码：
             </td>
             <td valign="middle" align="left">
-              <input type="text" class="inputgri" name="phone_number" th:value="${user.phone_number}"/>
+              <input type="text" class="inputgri" name="phone" th:value="${user.phone}"/>
             </td>
           </tr>
           <tr>
@@ -171,7 +171,7 @@
         </table>
         <p>
           <input type="submit" class="button" value="提交" />
-          <input type="button" class="button" onclick="location.href='/findAll'" value="取消 &nbsp;" />
+          <input type="button" class="button" onclick="location.href='/emp/findAll'" value="取消 &nbsp;" />
         </p>
       </form>
     </div>

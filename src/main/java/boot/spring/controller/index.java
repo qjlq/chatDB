@@ -13,10 +13,6 @@ import javax.annotation.Resource;
 public class index {
     @Resource
     private EmpService empService;
-    @GetMapping("/ManageLogin")
-    public String toLogin() {
-        return "/ManageUser";
-    }
     @GetMapping("/index")
     public String toIndex() {
         return "/login";
