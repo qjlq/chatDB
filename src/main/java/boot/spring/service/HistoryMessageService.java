@@ -1,6 +1,6 @@
 package boot.spring.service;
 
-import boot.spring.po.Product;
+import boot.spring.po.HistoryMessage;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 @Component
-public interface LinkService {
+public interface HistoryMessageService {
 
-    List<Product> getProductsByUid(String Uid);
+    List<HistoryMessage> getHistoryMessage();
 }

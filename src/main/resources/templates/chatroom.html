@@ -94,6 +94,12 @@ body {
 				username = data.username;
 				uid = data.uid;
 				$("#user").html(username);
+				//获取历史信息
+				$.get("/findHistoryMessage", function(data){
+					for(var i = 0; i < data.length; i++){
+						$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data[i].username + "&nbsp;" + data[i].chat_time + "</label><div class='text-success'>" + data[i].chat_data + "</div></div><br>");
+					}
+				});
 				if ('WebSocket' in window) { // 浏览器支持 WebSocket
 					websocket = new WebSocket("ws://localhost:8080/webSocket/" + username); // 打开一个 web socket
 				}
