@@ -94,7 +94,7 @@
                     for (var i = 0; i < data.length; i++) {
                         var order_id = 'order' + (i+1);
                         $("#order-container").append('<div class="textDiv" id="' + order_id + '"> </div>');
-                        $("#"+order_id).append('<img src="orderPicture/' + data[i].picture + '" alt="sorry, picture is missing" width="300" height="200" style="float:left">');
+                        $("#"+order_id).append('<img src="/orderPicture/' + data[i].picture + '" alt="sorry, picture is missing" width="300" height="200" style="float:left">');
                         var order_content_container = '<div class="order_content_container">';
                         order_content_container += '<div class="order_number"><b>订单编号：</b>' + data[i].oid + '</div>';
                         order_content_container += '<div class="order_time"><b>订单时间：</b>' + data[i].Otime + '</div>';
@@ -115,7 +115,7 @@
                                 document.getElementById(btn_id).addEventListener("click", function(e){
                                     var target = e.target;
                                     var index = target.id.slice(-1);
-                                    window.alert(target.getAttribute('oid'));
+<!--                                    window.alert(target.getAttribute('oid'));-->
                                     document.getElementById('myBtnReceive' + index).className += " myBtnReceiveHidden";
                                     document.getElementById('myReceived' + index).style.visibility = "visible";
                                     document.getElementById('order_stat' + index).className = "stat green";

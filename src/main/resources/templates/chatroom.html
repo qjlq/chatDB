@@ -165,7 +165,16 @@ body {
 			$("#show_product").click(function() {
 				$.post("/productlist?currentuserid=" + uid, function(data) {
 					for (var i = 0; i < data.length; i++) {
-						$("#link_list").append('<a href="#" class="list-group-item">' + data[i].product_name + '</a>');
+						btn_id = "link_btn" +i;
+						$("#link_list").append('<a href="#" class="list-group-item" product_name = "'+ data[i].product_name + '" id = "' + btn_id + '" picture = "' + data[i].picture + '" quantity = "' + data[i].quantity+ '" description = "' + data[i].description + '">' + data[i].product_name + '</a>');
+						document.getElementById(btn_id).addEventListener("click", function(e){
+							var target = e.target;
+							var product_name = target.getAttribute('product_name');
+							var description = target.getAttribute('description');
+							var picture = target.getAttribute('picture');
+							var quantity = target.getAttribute('quantity');
+							var price = target.getAttribute('price');
+						});
 					}
 				});
 			});
