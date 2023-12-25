@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>用户信息</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+  <script th:src="@{/js/axios.min.js}"></script>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .box{
+      width: 100px;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      position: absolute;
+      background-color: #999999;
+    }
+    .ulList{
+      width: 100px;
+      display: flex;
+      left: 0;
+      top: 0;
+      flex-direction: column;
+      background-color: grey;
+      position: absolute;
+      list-style: none;
+    }
+    .liList{
+      width: 100px;
+      line-height:100px;
+      display: flex;
+      flex-direction: column;
+      background-color: #999999;
+      position: relative;
+    }
+    .liList p{
+      font-size: 20px;
+      text-align: center;
+    }
+    .liList ul{
+      width: 100%;
+      position: relative;
+    }
+    .liList ul li{
+      width: 100px;
+      height: 60px;
+      line-height: 60px;
+      background-color: lemonchiffon;
+      list-style: none;
+      text-align: center;
+      position: relative;
+    }
+    .color {
+      width: 100px;
+      height: 60px;
+      line-height:60px;
+      background-color: #999999;
+    }
+    .color1 {
+      width: 100px;
+      height: 60px;
+      line-height:60px;
+      background-color: lemonchiffon;
+    }
+    .color2 {
+      color: black;
+    }
+    .content{
+      height:100%;
+      width:84.5%;
+      float:right;
+    }
+    .image__img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+    }
+    .image {
+      position: relative;
+      width: 100%;
+    }
+    .image__overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      color: #ffffff;
+      font-family: 'Quickand', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.25s;
+    }
+  </style>
+  <script>
+    function menu_active(ulId){
+      if(ulId.style.display == "none"){
+        ulId.style.display = "block"
+      }else{
+        ulId.style.display = "none"
+      }
+    }
+  </script>
+</head>
+
+<body>
+<div class="image">
+  <img class="image__img" src="https://cdn.pixabay.com/photo/2017/12/15/13/51/polynesia-3021072__340.jpg"
+       alt="Bricks">
+  <div class="image__overlay">
+    <div class="box">
+      <ul class="ulList">
+        <li class="liList">
+          <p class="color2">管理面板</p>
+          <input type="button" class="color" onclick="location.href='/emp/userIn'" value="用户信息">
+        </li>
+        <li class="liList">
+          <input type="button" class="color" onclick="menu_active(ulThree)" value="用户操作">
+          <ul class="childUl" id="ulThree" style="display: none;">
+            <li><input type="button" class="color1" onclick="location.href='/emp/toAdd'" value="添加用户"></li>
+            <li><input type="button" class="color1" onclick="location.href='/emp/Delete'" value="删除用户"></li>
+          </ul>
+        </li>
+        <li class="liList">
+          <input type="button" class="color" onclick="location.href='/index'" value="退出登录">
+        </li>
+      </ul>
+    </div>
+<div class="content">
+  <p id="whereami">
+  </p>
+  <h1>
+    搜索到的用户信息如下:
+  </h1>
+  <table border="1">
+    <tr>
+      <th>id号</th>
+      <th>用户名</th>
+      <th>密码</th>
+      <th>性别</th>
+      <th>手机号码</th>
+      <th>管理员</th>
+      <th>删除</th>
+      <th>创建时间</th>
+      <th>余额</th>
+      <th>功能</th>
+    </tr>
+
+    <tr th:each="emp: ${user}">
+      <td th:text="${emp.uid}"></td>
+      <td th:text="${emp.username}"/></td>
+      <td th:text="${emp.password}"/></td>
+      <td th:text="${emp.sex}"/></td>
+      <td th:text="${emp.phone}"/></td>
+      <td th:text="${emp.is_admin}"/></td>
+      <td th:text="${emp.is_delete}"/></td>
+      <td th:text="${emp.create_time}"/></td>
+      <td th:text="${emp.money}"/></td>
+      <td><a th:href="@{/emp/find(username=${emp.username})}">修改用户</a></td>
+    </tr>
+  </table>
+    <p>
+      <input type="button" class="button" onclick="location.href='/findAll'" value="返回 &nbsp;" />
+    </p>
+</div>
+</div>
+</div>
+</body>
+</html>

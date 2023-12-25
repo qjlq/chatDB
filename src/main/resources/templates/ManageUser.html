@@ -125,24 +125,17 @@
             <ul class="ulList">
                 <li class="liList">
                     <p class="color2">管理面板</p>
-                    <input type="button" class="color" onclick="location.href='/ems/emp/userIn'" value="用户信息">
+                    <input type="button" class="color" onclick="location.href='/emp/userIn'" value="用户信息">
                 </li>
                 <li class="liList">
                     <input type="button" class="color" onclick="menu_active(ulThree)" value="用户操作">
                     <ul class="childUl" id="ulThree" style="display: none;">
-                        <li><input type="button" class="color1" onclick="location.href='/ems/emp/toAdd'" value="添加用户"></li>
-                        <li><input type="button" class="color1" onclick="location.href='/ems/emp/Delete'" value="删除用户"></li>
+                        <li><input type="button" class="color1" onclick="location.href='/emp/toAdd'" value="添加用户"></li>
+                        <li><input type="button" class="color1" onclick="location.href='/emp/Delete'" value="删除用户"></li>
                     </ul>
                 </li>
                 <li class="liList">
-                    <input type="button" class="color" onclick="menu_active(ulFour)" value="权限操作">
-                    <ul class="childUl" id="ulFour" style="display: none;">
-                        <li><input type="button" class="color1" onclick="location.href='/ems/emp/Power'" value="增加权限"></li>
-                        <li><input type="button" class="color1" onclick="location.href='/ems/emp/deletePower'" value="删除权限"></li>
-                    </ul>
-                </li>
-                <li class="liList">
-                    <input type="button" class="color" onclick="location.href='/ems/index'" value="退出登录">
+                    <input type="button" class="color" onclick="location.href='/index'" value="退出登录">
                 </li>
             </ul>
         </div>
@@ -164,9 +157,9 @@
                         </td>
                         <p><td valign="middle" align="left">
                             <input type="submit" class="button" value="搜索 &raquo;"/>
-                        <input type="button" class="button" value="添加用户" onclick="location.href='/ems/emp/toAdd'">
-                        <input type="button" class="button" value="删除用户" onclick="location.href='/ems/emp/Delete'">
-                        <input type="button" class="button" value="退出登录" onclick="location.href='/ems/index'">
+                        <input type="button" class="button" value="添加用户" onclick="location.href='/emp/toAdd'">
+                        <input type="button" class="button" value="删除用户" onclick="location.href='/emp/Delete'">
+                        <input type="button" class="button" value="退出登录" onclick="location.href='/index'">
                     </td>
                         </p>
                     </tr>
@@ -182,9 +175,9 @@
                     <th class="wid2">管理员</th>
                     <th class="wid2">删除</th>
                     <th>创建时间</th>
+                    <th>余额</th>
                     <th class="wid1">功能</th>
                 </tr>
-
                 <tr th:each="emp: ${users}">
                     <td th:text="${emp.uid}"></td>
                     <td class="wid1" th:text="${emp.username}"/></td>
@@ -194,6 +187,7 @@
                     <td class="wid2" th:text="${emp.is_admin}"/></td>
                     <td class="wid2" th:text="${emp.is_delete}"/></td>
                     <td th:text="${emp.create_time}"/></td>
+                    <td th:text="${emp.money}"/></td>
                     <td class="wid1"><a th:href="@{/emp/find(username=${emp.username})}">修改用户</a></td>
                 </tr>
             </table>

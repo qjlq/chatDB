@@ -10,7 +10,7 @@
 	<!--从数据库中获取名字给getpwdbyname-->
 	<select id="getpwdbyname" parameterType="String"
 		resultMap="userMap">
-		select * from user where username=#{username}
+		select uid, username, password, sex, phone,is_admin, is_delete, create_time from user where username=#{username}
 	</select>
 
 	<!--注册-->
@@ -27,13 +27,8 @@
 
 	<!--管理员登录-->
 	<select id="ManageLogin" resultType="boot.spring.po.User">
-		select * from user
+		select uid, username, password, sex, phone,is_admin, is_delete, create_time from user
 		where username=#{username} and password=#{password}
 	</select>
 
-	<!--查询所有-->
-	<select id="findAll" resultType="boot.spring.po.User">
-		select *
-		from user
-	</select>
 </mapper>

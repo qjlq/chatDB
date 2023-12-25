@@ -49,7 +49,7 @@ public class Login {
 			}else if(login != null && login.getIs_admin() == 1 && login.getIs_delete() == 0){
 				httpSession.setAttribute("manager", login);
 				System.out.println("管理员登录成功");
-				return "redirect:/findAll";
+				return "redirect:/emp/findAll";
 			} else if (realpwd == null) {
 				return "userNull";
 			} else {

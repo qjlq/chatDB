@@ -1,11 +1,19 @@
 package boot.spring.controller;
 
+import boot.spring.po.User;
+import boot.spring.service.EmpService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.annotation.Resource;
 
 @Controller
 public class index {
-    @GetMapping("/findAll")
+    @Resource
+    private EmpService empService;
+    @GetMapping("/ManageLogin")
     public String toLogin() {
         return "/ManageUser";
     }
