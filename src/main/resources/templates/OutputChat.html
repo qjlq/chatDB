@@ -1,0 +1,61 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天记录</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />-->
+    <link rel="stylesheet" type="text/css" href="/css/OutputChat.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/chat.min.css"/>
+  <script th:src="@{/js/axios.min.js}"></script>
+</head>
+<script>
+        function menu_active(ulId){
+            if(ulId.style.display == "none"){
+                ulId.style.display = "block"
+            }else{
+                ulId.style.display = "none"
+            }
+        }
+</script>
+<body>
+<div class="topnav">
+    <a href="/welcome">主页</a>
+    <a href="/room">聊天室</a>
+    <a href="/history">历史订单</a>
+    <a href="/myProduct">我的商品</a>
+    <a href="/profile">个人页面</a>
+    <a class="active" href="/empChat/findAllUser">聊天记录</a>
+</div>
+<div class="image">
+<!--    <img class="image__img" src="https://cdn.pixabay.com/photo/2017/12/15/13/51/polynesia-3021072__340.jpg"-->
+<!--         alt="Bricks">-->
+    <div class="image__overlay">
+        <div class="content">
+            <p id="whereami">
+            </p>
+            <h1 style="text-align: center">
+                欢迎进入聊天记录页面
+            </h1>
+            <table class="table11_6">
+                <tr>
+                    <th >聊天ID</th>
+                    <th >用户ID</th>
+                    <th >聊天信息</th>
+                    <th >聊天时间</th>
+                </tr>
+
+                <tr th:each="empChat: ${userAll}">
+                    <td th:text="${empChat.cid}"/></td>
+                    <td th:text="${empChat.uid}"/></td>
+                    <td th:text="${empChat.chat_data}"/></td>
+                    <td th:text="${empChat.chat_time}"/></td>
+                </tr>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.box{
+    width: 100px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    position: absolute;
+    background-color: #999999;
+}
+.ulList{
+    width: 100px;
+    display: flex;
+    left: 0;
+    top: 0;
+    flex-direction: column;
+    background-color: grey;
+    position: absolute;
+    list-style: none;
+}
+.liList{
+    width: 100px;
+    line-height:100px;
+    display: flex;
+    flex-direction: column;
+    background-color: #999999;
+    position: relative;
+}
+.liList p{
+    font-size: 20px;
+    text-align: center;
+}
+.liList ul{
+    width: 100%;
+    position: relative;
+}
+.liList ul li{
+    width: 100px;
+    height: 60px;
+    line-height: 60px;
+    background-color: lemonchiffon;
+    list-style: none;
+    text-align: center;
+    position: relative;
+}
+.color {
+    width: 100px;
+    height: 60px;
+    line-height:60px;
+    background-color: #999999;
+}
+.color1 {
+    width: 100px;
+    height: 60px;
+    line-height:60px;
+    background-color: lemonchiffon;
+}
+.color2 {
+    color: black;
+}
+.content{
+    height:100%;
+    width:84.5%;
+    float:right;
+}
+.wid1 {
+    width: 80px;
+}
+.wid2 {
+    width: 60px;
+}
+.image__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+.image {
+    position: relative;
+    width: 100%;
+}
+.image__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    color: #ffffff;
+    font-family: 'Quickand', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.25s;
+}
+
+/*表格模板 1*/
+
+.table11_6 table {
+    width:100%;
+    margin:15px 0;
+    border:0;
+}
+.table11_6 th {
+    background-color:#96C7ED;
+    color:#000000
+}
+.table11_6,.table11_6 th,.table11_6 td {
+    font-size:0.95em;
+    text-align:center;
+    margin: 0px auto;
+    padding:4px;
+    border-collapse:collapse;
+}
+.table11_6 th,.table11_6 td {
+    border: 1px solid #73b4e7;
+    border-width:1px 0 1px 0;
+    border:2px inset #ffffff;
+}
+.table11_6 tr {
+    border: 1px solid #ffffff;
+}
+.table11_6 tr:nth-child(odd){
+    background-color:#dcecf9;
+}
+.table11_6 tr:nth-child(even){
+    background-color:#ffffff;
+}
+
+
