@@ -8,7 +8,8 @@ CREATE TABLE `user`(
 	`is_admin` int,
 	`is_delete` int,
 	`create_time` VARCHAR(32),
-	`money` DECIMAL CHECK(money >= 0)
+	`money` DECIMAL CHECK(money >= 0),
+	`address`  VARCHAR(80)
 	
 )CHARSET=utf8;
 
@@ -22,7 +23,7 @@ CREATE TABLE chat(
 	uid VARCHAR(40),
 	chat_data VARCHAR(300),
 	chat_time VARCHAR(32),
--- 	FOREIGN KEY (uid) REFERENCES `user`(uid)
+	FOREIGN KEY (uid) REFERENCES `user`(uid)
 )CHARSET=utf8;
 
 CREATE TABLE product(
@@ -32,8 +33,8 @@ CREATE TABLE product(
 	picture VARCHAR(80),
 	quantity INT CHECK(quantity >= 0),
 	price DECIMAL CHECK(price >= 0),
-	addres  VARCHAR(80)
-	Statust char(1) CHECK((Statust='Y') OR (Statust='N')) NOT NULL,
+	`address`  VARCHAR(80),
+	Statust char(1) CHECK((Statust='Y') OR (Statust='N')) NOT NULL
 )CHARSET=utf8;
 
 CREATE TABLE link(
