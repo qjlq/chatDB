@@ -24,4 +24,14 @@
         WHERE `order`.lid = link.lid AND link.pid = product.pid AND `order`.buy_uid = `user`.uid AND link.sell_uid = #{userid}
         ORDER BY `order`.Otime Desc;
     </select>
+    <insert id="sendOrder" parameterType="boot.spring.po.Product">
+        UPDATE `order`
+        set `order`.Status = 'unreceived'
+        WHERE `order`.oid = #{oid};
+    </insert>
+    <insert id="receivedOrder" parameterType="boot.spring.po.Product">
+        UPDATE `order`
+        set `order`.Status = 'received'
+        WHERE `order`.oid = #{oid};
+    </insert>
 </mapper>
