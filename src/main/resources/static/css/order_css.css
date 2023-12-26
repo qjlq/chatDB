@@ -137,6 +137,17 @@ body {
     visibility:hidden;
 }
 
+.myBtnReceiveSell {
+    position: absolute;
+    left: 35%;
+    cursor: pointer;
+    top:-25px;
+}
+
+.myBtnReceiveHiddenSell {
+    visibility:hidden;
+}
+
 .containerBtn_received{
     left:70%;
     top:-335px;
