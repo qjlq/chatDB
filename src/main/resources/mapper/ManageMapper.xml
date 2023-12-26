@@ -4,18 +4,18 @@
 
     <!--查询所有-->
     <select id="findAll" resultType="boot.spring.po.User">
-        select uid, username, password, sex, phone,is_admin, is_delete, create_time, money
+        select uid, username, password, sex, phone,is_admin, is_delete, create_time, money, address
         from user
     </select>
 
     <!--    增加用户-->
     <insert id="add" parameterType="boot.spring.po.User">
-        insert into user values (#{uid}, #{username}, #{password}, #{sex}, #{phone}, #{is_admin}, #{is_delete}, #{create_time}, 10000)
+        insert into user values (#{uid}, #{username}, #{password}, #{sex}, #{phone}, #{is_admin}, #{is_delete}, #{create_time}, #{money}, #{address})
     </insert>
 
     <!--删除用户-->
     <select id="delete" parameterType="String" resultType="boot.spring.po.User">
-        select uid, username, password, sex, phone,is_admin, is_delete, create_time
+        select uid, username, password, sex, phone,is_admin, is_delete, create_time, money, address
         from user
         where username = #{username}
     </select>
@@ -29,7 +29,7 @@
 
     <!--修改用户信息-->
     <update id="update" parameterType="boot.spring.po.User">
-        update user set uid = #{uid}, username = #{username}, password = #{password}, sex = #{sex}, phone = #{phone}, is_admin=#{is_admin}, is_delete=#{is_delete}, create_time=#{create_time}, money=#{money}
+        update user set uid = #{uid}, username = #{username}, password = #{password}, sex = #{sex}, phone = #{phone}, is_admin=#{is_admin}, is_delete=#{is_delete}, create_time=#{create_time}, money=#{money}, address=#{address}
         where username = #{username}
     </update>
 
