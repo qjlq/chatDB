@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
@@ -15,16 +16,16 @@ public class index {
     private EmpService empService;
     @GetMapping("/index")
     public String toIndex() {
-        return "/login";
+        return "login";
     }
 
     @GetMapping("/toRegister")
     public String toRegister() {
-        return "/register";
+        return "register";
     }
 
     @GetMapping("/toRegisterHint")
     public String toRegisterHint() {
-        return "/registerfail";
+        return "registerfail";
     }
 }

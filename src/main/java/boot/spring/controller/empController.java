@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+
 @Controller
 @RequestMapping("/emp")
 public class empController {
@@ -27,19 +28,19 @@ public class empController {
     public String findAll(Model model) {
         List<User> user = empService.findAll();
         model.addAttribute("users", user);
-        return "/ManageUser";
+        return "ManageUser";
     }
 
     //界面登录
     @GetMapping("userIn")
     public String userIn(){
-        return "redirect:/emp/findAll";
+        return "redirect:findAll";
     }
 
     //增加
     @GetMapping("/toAdd")
     public String toAdd(){
-        return "/addEmp";
+        return "addEmp";
     }
 
     //增加
@@ -51,16 +52,16 @@ public class empController {
             user.setCreate_time(dateFormat.format(date));
             user.setUid(UUID.randomUUID().toString());   //是javaJDK提供的一个自动生成主键的方法
             empService.add(user);
-            return "redirect:/emp/findAll";
+            return "redirect:findAll";
         }else {
-            return "/addHint";
+            return "addHint";
         }
     }
 
     //删除
     @GetMapping("/Delete")
     public String Delete(){
-        return "/delete";
+        return "delete";
     }
 
     @PostMapping("/delete")
@@ -70,9 +71,9 @@ public class empController {
         if (!user1.getUid().equals(user.getUid()) && user.getIs_delete() == 0) {
             user.setIs_delete(1);
             empService.update(user);
-            return "redirect:/emp/findAll";
+            return "redirect:findAll";
         }else {
-            return "/deleteHint";
+            return "deleteHint";
         }
     }
 
@@ -82,9 +83,9 @@ public class empController {
         User user = empService.find(username);
         if (user.getIs_delete() == 0) {
             model.addAttribute("user", user);
-            return "/updateEmp";
+            return "updateEmp";
         }else {
-            return "/myselfHint";
+            return "myselfHint";
         }
     }
 
@@ -97,10 +98,10 @@ public class empController {
         user.setUid(user2.getUid());
         if (user.getPhone().length() == 11 ) {
             empService.update(user);
-            return "redirect:/emp/findAll";
+            return "redirect:findAll";
         }else {
             model.addAttribute("user", user);
-            return "ems/updateHint";
+            return "updateHint";
         }
     }
 
@@ -110,9 +111,9 @@ public class empController {
         User user = empService.seek(username);
         if (user != null && user.getIs_delete() == 0){
             model.addAttribute("user",user);
-            return "/seekDate";
+            return "seekDate";
         }else {
-            return "/seekHint";
+            return "seekHint";
         }
     }
 }

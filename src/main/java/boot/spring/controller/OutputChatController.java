@@ -35,7 +35,7 @@ public class OutputChatController {
         List<OutputChat> outputChats = outputChatService.findAllUser();
 //        System.out.println("sss:"+outputChats);
         m.addAttribute("userAll", outputChats);
-        return "/OutputChat";
+        return "OutputChat";
     }
     // @RequestMapping(value = "/currentuser", method = RequestMethod.GET)
 	// @ResponseBody
