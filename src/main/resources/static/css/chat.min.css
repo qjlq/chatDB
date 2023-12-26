@@ -7297,9 +7297,9 @@ button.close {
 
 #link_container{
     position:absolute;
-    left:65%;
+    left:55%;
     background-color:rgba(255, 255, 225, 0.8);
-    top:450px;
+    top:350px;
     color:white;
     border-radius:0px 0px 25px 25px;
 }

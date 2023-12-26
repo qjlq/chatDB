@@ -63,7 +63,7 @@
                   for (var i = 0; i < data.length; i++) {
                       var order_id = 'products' + (i+1);
                       $("#product-container").append('<div class="textDiv" id="' + order_id + '"> </div>');
-                      $("#" + order_id).append('<img src="orderPicture/' + data[i].picture + '" alt="sorry, picture is missing" width="300" height="200" style="float:left">');
+                      $("#" + order_id).append('<img src="/orderPicture/' + data[i].picture + '" alt="sorry, picture is missing" width="300" height="200" style="float:left">');
                       var order_content_container = '<div class="order_content_container">';
                       order_content_container += '<div class="product_number"><b>商品编号：</b>' + data[i].pid + '</div>';
                       order_content_container += '<div class="product_name"><b>商品名称：</b>' + data[i].product_name + '</div>';

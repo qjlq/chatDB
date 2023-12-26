@@ -1,26 +1,23 @@
 package boot.spring.controller;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
-import boot.spring.po.Message;
-import boot.spring.po.SaveMessage;
+import boot.spring.po.*;
+import boot.spring.service.HistoryMessageService;
 import boot.spring.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import boot.spring.po.User;
 import boot.spring.service.LoginService;
 import boot.spring.service.WebSocketServer;
 
@@ -29,7 +26,9 @@ public class ChatController {
 
 	@Resource
 	MessageService messageService;
-	
+
+	@Resource
+	HistoryMessageService historyMessageService;
 	/**
 	 * 在线用户
 	 */
@@ -91,5 +90,11 @@ public class ChatController {
 		return "Outputchat";
 	}
 
-
+	@RequestMapping("/findHistoryMessage")
+	@ResponseBody
+	public List<HistoryMessage> findHistoryMessage(Model m) {
+		List<HistoryMessage> historyMessages = historyMessageService.getHistoryMessage();
+//        System.out.println("sss:"+outputChats);
+		return historyMessages;
+	}
 }
