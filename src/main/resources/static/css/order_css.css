@@ -152,3 +152,43 @@ body {
     font-size: 18px;
     color:rgba(190, 230, 247, 1);
 }
+
+.containerBtnTitle{
+    margin: 15px;
+    padding-left: 25px;
+    padding-top: 35px;
+}
+
+.myBtnSwitch{
+    margin: 10px 15px;
+    font-size: 18px;
+    text-align: center;
+    background-color:rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    transition: 0.3s;
+    padding:5px;
+    cursor: pointer;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+.myBtnSwitch:hover{
+    background-color:rgba(18, 59, 228, 0.6);
+    color:white;
+    transition: 0.3s;
+}
+
+#sell-container{
+    position: absolute;
+    width:100%;
+    top: 130px;
+    left:0%;
+}
+
+.buy{
+    display: block;
+}
+
+
+.sell{
+    display: none;
+}
