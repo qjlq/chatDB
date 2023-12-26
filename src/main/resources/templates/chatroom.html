@@ -133,10 +133,11 @@ body {
 						order_content_container += '</div>';
 						$("#" + order_id).append(order_content_container); //创建框
 						$("#" + order_id).append('<div class="BuyDiv" id="BuyContainer' + data.product_name + data.date.slice(-5,-4) + data.date.slice(-2) + '"> </div>');
-						var buy_content_container = '<b>购买数量：</b>';
+						var buy_content_container = '<b>购买数量：</b><br>';
 						var sign =  data.product_name + data.date.slice(-5,-4) + data.date.slice(-2);
 						buy_content_container += '<input type="number" id="buy_quantity' + sign + '" name="buy_quantity" step="1"/>';
 						$("#" + "BuyContainer" + sign).append(buy_content_container);
+						$("#" + "BuyContainer" + sign).append("<br>");
 						$("#" + "BuyContainer" + sign).append('<button type="button" id="' + 'buy_btn_'+ sign + '" pid="'+ data.pid + '" sign="'+ sign +'" buy_id="'+ uid + '">确定购买</button>');
 						document.getElementById("buy_btn_"+sign).addEventListener("click", function(e){
 							var target = e.target;
