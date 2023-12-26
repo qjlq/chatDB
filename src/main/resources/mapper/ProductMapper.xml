@@ -26,6 +26,6 @@
         WHERE link.pid = product.pid AND sell_uid = #{userid};
         SELECT `order`.Status
         FROM `order`,product,link
-        WHERE link.pid = product.pid AND `order`.lid = link.lid AND sell_uid = #{userid};
+        WHERE link.pid = product.pid AND `order`.lid = link.lid AND sell_uid = #{userid} AND product.Statust like 'Y';
     </select>
 </mapper>

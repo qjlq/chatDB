@@ -67,51 +67,65 @@
                       var order_content_container = '<div class="order_content_container">';
                       order_content_container += '<div class="product_number"><b>商品编号：</b>' + data[i].pid + '</div>';
                       order_content_container += '<div class="product_name"><b>商品名称：</b>' + data[i].product_name + '</div>';
-                      order_content_container += '<div class="product_quantity"><b>购买数量：</b>' + data[i].Pquantity + '</div>';
-                      order_content_container += '<div class="product_price"><b>订单总价：</b>' + data[i].total + '</div>';
                       order_content_container += '<div class="product_description"><b>商品描述：</b>' + data[i].description + '</div>';
+                      order_content_container += '<div class="product_quantity"><b>库存数量：</b>' + data[i].Pquantity + '</div>';
+                      order_content_container += '<div class="product_price"><b>商品价格：</b>' + data[i].total + '</div>';
                       order_content_container += '</div>';
                       //window.alert(data[i].Status);
                       $("#" + order_id).append(order_content_container); //创建框
-                      $("#" + order_id).append('<div class="stat blue" id="order_stat' + (i + 1) + '"> 未有订单</div>');
-                      $("#" + order_id).append('<div class="containerBtn"><button id="' + 'myBtnReceive' + (i + 1) + '"class="myBtnReceive" oid="' + data[i].oid + '">确认发货</button></div>');
-                      $("#" + order_id).append('<div class="containerBtn_received" id="myReceived' + (i + 1) + '"><b>已发货</b></div>');
-                      switch(data[i].Status){
-                          case "unsent":
+                      //$("#" + order_id).append('<div class="stat blue" id="order_stat' + (i + 1) + '"> 未有订单</div>');
+                      $("#" + order_id).append('<div class="containerBtn"><button id="' + 'myBtnReceive' + (i + 1) + '"class="myBtnReceive" pid="' + data[i].pid + '">删除商品</button></div>');
+                      // $("#" + order_id).append('<div class="containerBtn_received" id="myReceived' + (i + 1) + '"><b>已发货</b></div>');
+                      // switch(data[i].Status){
+                      //     case "unsent":
+                              btn_id = 'myBtnReceive' + (i + 1)
                               document.getElementById(btn_id).addEventListener("click", function(e){
+                                  window.alert("1");
                                   var target = e.target;
-                                  var index = target.id.slice(-1);
-                                  //window.alert(target.getAttribute('pid'));
-                                  document.getElementById('myBtnReceive' + index).className += " myBtnReceiveHidden";
-                                  document.getElementById('myReceived' + index).style.visibility = "visible";
-                                  document.getElementById('order_stat' + index).className = "stat green";
-                                  document.getElementById('order_stat' + index).innerHTML = "未发货";
+                                  //var index = target.id.slice(-1);
+                                  var t = target.getAttribute("pid");
+                                  window.alert(t);
+                                  $.get("/currentuser", function(data) {
+                                    username = data.username;
+                                    uid = data.uid;
+                                  if (uid != undefined){
+                                    document.getElementById("form_uid").setAttribute("value", uid);
+            $("#publish-form").ajaxSubmit(function (data) {
+                alert(data);
+                window.location.href="/chat";
+            });
+        }
+        else{
+            window.alert("please login");
+            window.location.href="/";
+        } 
+                                  })
+                                  // document.getElementById('myBtnReceive' + index).className += " myBtnReceiveHidden";
+
                               });
-                              break;
-                          case "received":
-                              document.getElementById(btn_id).className += " myBtnReceiveHidden";
-                              document.getElementById(received_id).style.visibility = "invisible";
-                              document.getElementById(stat_id).className = "stat green";
-                              document.getElementById(stat_id).innerHTML = "已收货";
-                              break;
-                          case "unreceived":
-                              document.getElementById(btn_id).className += " myBtnReceiveHidden";
-                              document.getElementById(received_id).style.visibility = "visible";
-                              document.getElementById(received_id).getElementsByTagName('b')[0].innerHTML = "未发货";
-                              document.getElementById(stat_id).className = "stat red";
-                              document.getElementById(stat_id).innerHTML = "未发货";
-                              break;
+                      //         break;
+                      //     case "received":
+                      //         document.getElementById(btn_id).className += " myBtnReceiveHidden";
+                      //         document.getElementById(received_id).style.visibility = "invisible";
+                      //         document.getElementById(stat_id).className = "stat green";
+                      //         document.getElementById(stat_id).innerHTML = "已收货";
+                      //         break;
+                      //     case "unreceived":
+                      //         document.getElementById(btn_id).className += " myBtnReceiveHidden";
+                      //         document.getElementById(received_id).style.visibility = "visible";
+                      //         document.getElementById(received_id).getElementsByTagName('b')[0].innerHTML = "未发货";
+                      //         document.getElementById(stat_id).className = "stat red";
+                      //         document.getElementById(stat_id).innerHTML = "未发货";
+                      //         break;
                           // default:
                           //     document.getElementById(btn_id).className += " myBtnReceiveHidden";
                           //     document.getElementById(received_id).style.visibility = "visible";
                           //     document.getElementById(stat_id).className = "stat blue";
                           //     document.getElementById(stat_id).innerHTML = "未有订单";
-                      }
+                      //}
 
   //window.alert(data[i]);
-<!--                        window.alert(data[i].picture);-->
                   }
-<!--                    window.alert(data.length);-->
 
               });
     });
