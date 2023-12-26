@@ -130,7 +130,7 @@ body {
     position: absolute;
     left: 35%;
     cursor: pointer;
-    top:-25px;
+    top: 80px;
 }
 
 .myBtnReceiveHidden {
