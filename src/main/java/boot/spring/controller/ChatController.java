@@ -116,10 +116,10 @@ public class ChatController {
 		User seller = loginService.getUserByPid(pid);
 		BigDecimal total = product.price.multiply(new BigDecimal(quantity));
 		if (buyer.getMoney().compareTo(total) < 0){
-			return "nomoney";
+			return "余额不足";
 		}
 		else if (product.quantity < quantity ){
-			return "noquantity";
+			return "商品数量不足";
 		}
 		else {
 			seller.setMoney(buyer.getMoney().add(total));
@@ -134,6 +134,6 @@ public class ChatController {
 			Order order = new Order(oid,product.lid, buy_id, quantity, total, otime, "unsent",lnumber,product.product_name, product.picture);
 			orderService.addOrder(order);
 		}
-		return "success";
+		return "购买成功";
 	}
 }
