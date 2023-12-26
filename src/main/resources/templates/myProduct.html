@@ -80,13 +80,13 @@
                       //     case "unsent":
                               btn_id = 'myBtnReceive' + (i + 1)
                               document.getElementById(btn_id).addEventListener("click", function(e){
-                                  window.alert("1");
+                                  //window.alert("1");
                                   var target = e.target;
                                   //var index = target.id.slice(-1);
                                   var t = target.getAttribute("pid");
                                   // window.alert(t);
                                   $.post("/deleteproduct?pid="+t, function(data) {
-                                    window.alert(t);
+                                    window.alert("product delete");
                                     window.location.href="/myProduct";
                                   })
                                   $.get("/currentuser", function(data) {
