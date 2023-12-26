@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="/css/OutputChat.css"/>
     <link rel="stylesheet" type="text/css" href="/css/chat.min.css"/>
   <script th:src="@{/js/axios.min.js}"></script>
+  <script src="./js/jquery-1.12.3.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
 </head>
 <script>
         function menu_active(ulId){
@@ -16,14 +18,25 @@
             }else{
                 ulId.style.display = "none"
             } 
-        } 
+        }
+        var uid;
+        $(document).ready(function() { //调用失败
+            $.get("/currentuser", function(data) {
+                uid = data.uid;
+                window.alert(uid);       
+                if (uid == undefined){
+                    window.alert("please login");
+                    window.location.href="/";
+                }
+            });
+        });   
 </script>
 <body>
 <div class="topnav">
-    <a href="/chat">聊天室</a>
+    <!-- <a href="/chat">聊天室</a>
     <a href="/history">历史订单</a>
-    <a href="/myProduct">我的商品</a>
-    <a href="/profile">个人页面</a>
+    <a href="/myProduct">我的商品</a> -->
+    <a href="/emp/findAll">管理面板</a>
     <a class="active" href="/empChat/findAllUser">聊天记录</a>
 </div>
 <div class="image">
@@ -56,7 +69,7 @@
 
     </div>
 </div>
-    <script>
+    <!-- <script>
 		var uid;
         $(document).ready(function() { //调用失败
             $.get("/currentuser", function(data) {
@@ -68,6 +81,6 @@
                 }
             });
         });  
-    </script>
+    </script> -->
 </body>
 </html>

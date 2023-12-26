@@ -5,6 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
     <script th:src="@{/js/axios.min.js}"></script>
+    <script src="./js/jquery-1.12.3.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
     <style>
         *{
             margin: 0;
@@ -114,6 +116,17 @@
                 ulId.style.display = "none"
             }
         }
+        var uid;
+        $(document).ready(function() { //调用失败
+            $.get("/currentuser", function(data) {
+                uid = data.uid;
+                window.alert(uid);       
+                if (uid == undefined){
+                    window.alert("please login");
+                    window.location.href="/";
+                }
+            });
+        }); 
     </script>
 </head>
 <body>
@@ -136,6 +149,7 @@
                 </li>
                 <li class="liList">
                     <input type="button" class="color" onclick="location.href='/chat'" value="聊天室">
+                    <input type="button" class="color" value="聊天记录" onclick="location.href='/empChat/findAllUser'">
                     <input type="button" class="color" onclick="location.href='/index'" value="退出登录">
                 </li>
             </ul>
