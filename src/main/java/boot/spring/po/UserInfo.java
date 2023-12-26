@@ -10,14 +10,16 @@ public class UserInfo {
     private String phone;
     private String create_time;
     private BigDecimal money;
+    private String address;
 
-    public UserInfo(String uid, String username, String sex, String phone, String create_time, BigDecimal money) {
+    public UserInfo(String uid, String username, String sex, String phone, String create_time, BigDecimal money, String address) {
         this.uid = uid;
         this.username = username;
         this.sex = sex;
         this.phone = phone;
         this.create_time = create_time;
         this.money = money;
+        this.address = address;
     }
 
     public UserInfo() {
@@ -71,6 +73,14 @@ public class UserInfo {
         this.money = money;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -80,6 +90,7 @@ public class UserInfo {
                 ", phone='" + phone + '\'' +
                 ", create_time='" + create_time + '\'' +
                 ", money=" + money +
+                ", address='" + address + '\'' +
                 '}';
     }
 }
