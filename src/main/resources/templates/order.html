@@ -201,7 +201,7 @@
                                     $.post("/receivedOrder?oid="+t, function(data) {
                                         
                                         window.alert("order receive");
-                                        //window.location.href="/myProduct";
+                                        window.location.href="/history";
                                     })
                                     document.getElementById('myBtnReceive' + index).className += " myBtnReceiveHidden";
                                     document.getElementById('myReceived' + index).style.visibility = "visible";
@@ -267,6 +267,7 @@
                                     var t = target.getAttribute('oid');
                                     $.post("/sendOrder?oid="+t, function(data) {
                                         window.alert("order send");
+                                        window.location.href="/history"
                                         //window.location.href="/myProduct";
                                     })
                                     document.getElementById('myBtnReceiveSell' + index).className += " myBtnReceiveHiddenSell";
