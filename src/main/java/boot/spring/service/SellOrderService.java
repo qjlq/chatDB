@@ -11,4 +11,6 @@ import java.util.List;
 public interface SellOrderService {
 
     List<SellOrder> getSellHistoryByUid(String uid);
+    void sendOrderByoid(String oid);
+    void receivedOrderByoid(String oid);
 }

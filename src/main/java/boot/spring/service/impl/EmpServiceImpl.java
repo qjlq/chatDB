@@ -4,13 +4,15 @@ import boot.spring.mapper.EmpMapper;
 import boot.spring.po.User;
 import boot.spring.service.EmpService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 5)
 public class EmpServiceImpl implements EmpService {
     @Resource
     private EmpMapper empMapper;
