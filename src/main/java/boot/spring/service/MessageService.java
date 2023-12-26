@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import boot.spring.po.User;
 @Service
 @Component
-@Async("taskExecutor")
+//@Async("taskExecutor")
 //@Async
 public interface MessageService {
     //存聊天信息
