@@ -9,13 +9,14 @@
         <result column="phone" property="phone" />
         <result column="create_time" property="create_time" />
         <result column="money" property="money" />
+        <result column="address" property="address" />
 
 
     </resultMap>
     <!--从数据库中获取名字-->
     <select id="getUserUid" parameterType="String"
             resultMap="userInfoMap">
-        select user.uid, user.username, user.sex, user.phone, user.create_time, user.money
+        select user.uid, user.username, user.sex, user.phone, user.create_time, user.money, user.address
         from user
         where user.uid=#{userid}
     </select>

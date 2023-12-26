@@ -118,7 +118,7 @@
         }
         var uid;
         $(document).ready(function() { //调用失败
-            $.get("/currentuser", function(data) {
+            $.get("/currentuser?session="+ session, function(data) {
                 uid = data.uid;
                 window.alert(uid);       
                 if (uid == undefined){
@@ -211,5 +211,20 @@
         </div>
     </div>
 </div>
+    <script>
+        function menu_active(ulId){
+
+        var uid;
+        $(document).ready(function() { //调用失败
+            $.get("/currentuser?session="+ session, function(data) {
+                uid = data.uid;
+                window.alert(uid);
+                if (uid == undefined){
+                    window.alert("please login");
+                    window.location.href="/";
+                }
+            });
+        });
+    </script>
 </body>
 </html>
