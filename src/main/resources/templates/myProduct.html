@@ -47,6 +47,12 @@
   <script>
     var username;
     var uid;
+<!--    location.reload();-->
+
+<!--  location.assign(location);-->
+<!--     location.replace(location)-->
+    document.execCommand('Refresh')
+
     $(document).ready(function() {
       $.get("/currentuser", function(data) {
         username = data.username;

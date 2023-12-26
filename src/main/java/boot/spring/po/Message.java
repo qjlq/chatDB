@@ -24,6 +24,7 @@ public class Message {
 	public String picture;
 	public String quantity;
 	public String price;
+	public String pid;
 
 
 	public String getFrom() {

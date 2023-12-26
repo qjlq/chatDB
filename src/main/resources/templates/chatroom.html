@@ -136,12 +136,16 @@ body {
 						var buy_content_container = '<b>购买数量：</b>';
 						buy_content_container += '<input type="number" id="buy_quantity" name="buy_quantity" step="1"/>';
 						$("#" + "BuyContainer" + data.product_name + data.date.slice(-5,-4) + data.date.slice(-2)).append(buy_content_container);
-						$("#" + "BuyContainer" + data.product_name + data.date.slice(-5,-4) + data.date.slice(-2)).append('<button type="button">确定购买</button>');
+						$("#" + "BuyContainer" + data.product_name + data.date.slice(-5,-4) + data.date.slice(-2)).append('<button type="button" id="' + buy_btn_+ data.product_name + data.date.slice(-5,-4) + data.date.slice(-2) +'">确定购买</button>');
+						document.getElementById("but_btn"+data.product_name + data.date.slice(-5,-4) + data.date.slice(-2)).addEventListener("click", function(e){
 
+						});
 					} else { //普通消息
 						$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + data.date + "</label><div class='text-success'>" + data.text + "</div></div><br>");
 						scrollToBottom();
-						$.post("/storemessage?uid=" + uid + "&text=" + data.text + "&time=" + data.date, function(data) {});
+						if (data.from == username) {
+							$.post("/storemessage?uid=" + uid + "&text=" + data.text + "&time=" + data.date, function(data) {});
+						}
 					}
 				};
 				// 加载当前用户
@@ -155,7 +159,7 @@ body {
 				$.post("/productlist?currentuserid=" + uid, function(data) {
 					for (var i = 0; i < data.length; i++) {
 						btn_id = "link_btn" +i;
-						$("#link_list").append('<button class="list-group-item" product_name = "'+ data[i].product_name + '" id = "' + btn_id + '" picture = "' + data[i].picture + '" quantity = "' + data[i].quantity+ '" description = "' + data[i].description + '" price = "' + data[i].total + '">' + data[i].product_name + '</button>');
+						$("#link_list").append('<button class="list-group-item" product_name = "'+ data[i].product_name + '" id = "' + btn_id + '" picture = "' + data[i].picture + '" quantity = "' + data[i].quantity+ '" pid = "' + data[i].pid+ '" description = "' + data[i].description + '" price = "' + data[i].total + '">' + data[i].product_name + '</button>');
 						document.getElementById(btn_id).addEventListener("click", function(e){
 							var data = {};
 							var target = e.target;
@@ -166,6 +170,7 @@ body {
 <!--							window.alert(target.getAttribute('price'));-->
 							data["from"] = username;
 							data["to"] = 1;
+							data["pid"] = target.getAttribute('pid');
 							data["product_name"] = target.getAttribute('product_name');
 							data["description"] = target.getAttribute('description');
 							data["picture"] = target.getAttribute('picture');
