@@ -139,7 +139,7 @@ body {
 				$.post("/productlist?currentuserid=" + uid, function(data) {
 					for (var i = 0; i < data.length; i++) {
 						btn_id = "link_btn" +i;
-						$("#link_list").append('<button class="list-group-item" product_name = "'+ data[i].product_name + '" id = "' + btn_id + '" picture = "' + data[i].picture + '" quantity = "' + data[i].quantity+ '" description = "' + data[i].description + '">' + data[i].product_name + '</button>');
+						$("#link_list").append('<button class="list-group-item" product_name = "'+ data[i].product_name + '" id = "' + btn_id + '" picture = "' + data[i].picture + '" quantity = "' + data[i].quantity+ '" description = "' + data[i].description + '" price = "' + data[i].price + '">' + data[i].product_name + '</button>');
 						document.getElementById(btn_id).addEventListener("click", function(e){
 							var data = {};
 							var target = e.target;

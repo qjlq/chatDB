@@ -7305,6 +7305,7 @@ button.close {
     visibility:hidden;
     opacity:0;
     transition: 1s;
+    border-radius:25px;
 }
 
 #link-title{
