@@ -10,20 +10,14 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
-import boot.spring.po.Order;
-import boot.spring.po.Product;
-import boot.spring.service.LoginService;
+import boot.spring.po.*;
+import boot.spring.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import boot.spring.po.User;
-import boot.spring.service.OrderService;
-import boot.spring.service.ProductService;
-import boot.spring.service.WebSocketServer;
 
 import boot.spring.po.User;
 
@@ -34,6 +28,9 @@ public class HistoryController {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    SellOrderService sellOrderService;
 
     @RequestMapping("/chat")
     public String chat() {
@@ -63,5 +60,13 @@ public class HistoryController {
     @RequestMapping("/edit_goods")
     public String edit_goods(){
         return "edit";
+    }
+
+    //加载当前用户的售卖历史
+    @RequestMapping("/sellorderhistory")
+    @ResponseBody
+    public  List<SellOrder> sellorderhistory(@RequestParam("currentuserid") String currentuserid) {
+        List<SellOrder> sellOrders = sellOrderService.getSellHistoryByUid(currentuserid);
+        return sellOrders; //返回结果
     }
 }

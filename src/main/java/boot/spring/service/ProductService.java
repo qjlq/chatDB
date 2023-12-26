@@ -17,5 +17,6 @@ public interface ProductService {
     void saveProduct(Product product);
     void deleteProduct(String pid);
     List<Product> getHistoryByUid(String Uid);
-
+    void updateQuantity(Product product);
+    Product getProductByPid(String pid);
 }

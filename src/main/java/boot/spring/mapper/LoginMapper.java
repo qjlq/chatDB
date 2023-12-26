@@ -16,4 +16,6 @@ public interface LoginMapper {
 
 	User ManageLogin(@Param("username") String name, @Param("password") String password);
 
+	User getUserByUid(String uid);
+	User getUserByPid(String pid);
 }

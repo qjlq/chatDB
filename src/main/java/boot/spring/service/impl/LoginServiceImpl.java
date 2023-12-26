@@ -44,4 +44,15 @@ public class LoginServiceImpl implements LoginService {
 		return loginmapper.ManageLogin(username, password);
 	}
 
+	@Override
+	public User getUserByUid(String uid) {
+		User user = loginmapper.getUserByUid(uid);
+		return user;
+	}
+
+	@Override
+	public User getUserByPid(String pid) {
+		User user = loginmapper.getUserByPid(pid);
+		return user;
+	}
 }

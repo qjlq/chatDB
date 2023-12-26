@@ -15,5 +15,6 @@ public interface LoginService {
 	void register(User user);
 
 	User ManageLogin(String username, String password);
-
+	User getUserByUid(String uid);
+	User getUserByPid(String pid);
 }

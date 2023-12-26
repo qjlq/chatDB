@@ -27,8 +27,20 @@
 
 	<!--管理员登录-->
 	<select id="ManageLogin" resultType="boot.spring.po.User">
-		select uid, username, password, sex, phone,is_admin, is_delete, create_time,money,address from user
+		select uid, username, 'password', sex, phone,is_admin, is_delete, create_time,money,address from `user`
 		where username=#{username} and password=#{password}
+	</select>
+
+	<select id="getUserByUid" parameterType="String"
+			resultType="boot.spring.po.User">
+		select uid, username, `password`, sex, phone,is_admin, is_delete, create_time,money,address from `user` where uid=#{uid};
+	</select>
+
+	<select id="getUserByPid" parameterType="String"
+			resultType="boot.spring.po.User">
+		select `user`.uid, `user`.username, `user`.`password`, `user`.sex, `user`.phone,`user`.is_admin, `user`.is_delete, `user`.create_time,`user`.money,`user`.address
+		from `user`, link, product
+		where product.pid = link.pid AND link.sell_uid = `user`.uid AND product.pid = #{pid};
 	</select>
 
 </mapper>

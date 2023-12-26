@@ -22,4 +22,8 @@
         WHERE `order`.lid = link.lid AND link.pid = product.pid AND buy_uid = #{userid}
         ORDER BY `order`.Otime Desc;
     </select>
+
+    <insert id="addOrder" parameterType="boot.spring.po.Order">
+        Insert into `order` values (#{oid}, #{lid}, #{buy_uid}, #{Oquantity}, #{total}, #{Otime},"unsent", #{Lnumber});
+    </insert>
 </mapper>

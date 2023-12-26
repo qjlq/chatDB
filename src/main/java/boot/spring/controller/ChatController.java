@@ -1,5 +1,6 @@
 package boot.spring.controller;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -8,8 +9,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import boot.spring.po.*;
-import boot.spring.service.HistoryMessageService;
-import boot.spring.service.MessageService;
+import boot.spring.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,17 +18,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import boot.spring.service.LoginService;
-import boot.spring.service.WebSocketServer;
-
 @Controller
 public class ChatController {
+	@Resource
+	ProductService productService;
 
 	@Resource
 	MessageService messageService;
 
 	@Resource
 	HistoryMessageService historyMessageService;
+
+	@Resource
+	LoginService loginService;
+
+	@Resource
+	OrderService orderService;
+
+	@Resource
+	EmpService empService;
 	/**
 	 * 在线用户
 	 */
@@ -96,5 +104,36 @@ public class ChatController {
 		List<HistoryMessage> historyMessages = historyMessageService.getHistoryMessage();
 //        System.out.println("sss:"+outputChats);
 		return historyMessages;
+	}
+
+	@RequestMapping("/buyProduct")
+	@ResponseBody
+	public String buyProduct(@RequestParam("pid") String pid,
+							 @RequestParam("quantity") int quantity,
+							 @RequestParam("buy_id") String buy_id) {
+		Product product = productService.getProductByPid(pid);
+		User buyer = loginService.getUserByUid(buy_id);
+		User seller = loginService.getUserByPid(pid);
+		BigDecimal total = product.price.multiply(new BigDecimal(quantity));
+		if (buyer.getMoney().compareTo(total) < 0){
+			return "nomoney";
+		}
+		else if (product.quantity < quantity ){
+			return "noquantity";
+		}
+		else {
+			seller.setMoney(buyer.getMoney().add(total));
+			buyer.setMoney(buyer.getMoney().subtract(total));
+			empService.update(seller);
+			empService.update(buyer);
+			product.quantity -= quantity;
+			productService.updateQuantity(product);
+			String oid = UUID.randomUUID().toString();
+			String lnumber = UUID.randomUUID().toString();
+			String otime = (new Date()).toString();
+			Order order = new Order(oid,product.lid, buy_id, quantity, total, otime, "unsent",lnumber,product.product_name, product.picture);
+			orderService.addOrder(order);
+		}
+		return "success";
 	}
 }

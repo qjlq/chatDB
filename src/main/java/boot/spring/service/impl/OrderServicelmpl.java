@@ -25,8 +25,14 @@ public class OrderServicelmpl implements OrderService{
     OrderMapper orderMapper;
 
     //实现接口方法
+    @Override
     public List<Order> getHistoryByUid(String uid) {
         List<Order> o = orderMapper.getOrderByUid(uid);
         return o;
+    }
+
+    @Override
+    public void addOrder(Order order) {
+        orderMapper.addOrder(order);
     }
 }

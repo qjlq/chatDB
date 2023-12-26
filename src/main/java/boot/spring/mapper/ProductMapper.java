@@ -12,4 +12,6 @@ public interface ProductMapper {
     void setProduct(Product product);
     void deleteProduct(String pid);
     List<Product> getProductByUid(String uid);
+    void updateQuantity(Product product);
+    Product getProductByPid(String pid);
 }

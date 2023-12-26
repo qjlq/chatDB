@@ -1,5 +1,7 @@
 package boot.spring.po;
 
+import java.math.BigDecimal;
+
 //该文件就是定义变量名字和方法
 public class User {
 	private String uid;
@@ -11,7 +13,7 @@ public class User {
 	private int is_delete=0;
 	private String create_time;
 
-	private Float money;
+	private BigDecimal money;
 	private String address;
 
 	public User() {
@@ -22,7 +24,7 @@ public class User {
 		this.username = username;
 	}
 
-	public User(String uid, String username, String password, String sex, String phone, int is_admin, int is_delete, String create_time, Float money, String address) {
+	public User(String uid, String username, String password, String sex, String phone, int is_admin, int is_delete, String create_time, BigDecimal money, String address) {
 		this.uid = uid;
 		this.username = username;
 		this.password = password;
@@ -35,11 +37,11 @@ public class User {
 		this.address = address;
 	}
 
-	public Float getMoney() {
+	public BigDecimal getMoney() {
 		return money;
 	}
 
-	public void setMoney(Float money) {
+	public void setMoney(BigDecimal money) {
 		this.money = money;
 	}
 

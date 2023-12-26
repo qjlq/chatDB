@@ -33,4 +33,18 @@
         set product.Statust = 'N'
         WHERE product.pid = #{pid}
     </insert>
+
+    <!--修改信息-->
+    <update id="updateQuantity" parameterType="boot.spring.po.Product">
+        update product set quantity = #{quantity}
+        where pid = #{pid}
+    </update>
+
+    <!--从数据库中获取信息-->
+    <select id="getProductByPid" parameterType="String"
+            resultType="boot.spring.po.Product">
+        SELECT product.pid, product.product_name, product.picture, product.description, product.quantity, product.price, link.lid
+        FROM product,link
+        WHERE link.pid = product.pid AND product.Statust like "Y" AND product.pid = #{pid};
+    </select>
 </mapper>

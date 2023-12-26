@@ -134,16 +134,27 @@ body {
 						$("#" + order_id).append(order_content_container); //创建框
 						$("#" + order_id).append('<div class="BuyDiv" id="BuyContainer' + data.product_name + data.date.slice(-5,-4) + data.date.slice(-2) + '"> </div>');
 						var buy_content_container = '<b>购买数量：</b>';
-						buy_content_container += '<input type="number" id="buy_quantity" name="buy_quantity" step="1"/>';
-						$("#" + "BuyContainer" + data.product_name + data.date.slice(-5,-4) + data.date.slice(-2)).append(buy_content_container);
-						$("#" + "BuyContainer" + data.product_name + data.date.slice(-5,-4) + data.date.slice(-2)).append('<button type="button" id="' + buy_btn_+ data.product_name + data.date.slice(-5,-4) + data.date.slice(-2) +'">确定购买</button>');
-						document.getElementById("but_btn"+data.product_name + data.date.slice(-5,-4) + data.date.slice(-2)).addEventListener("click", function(e){
-
+						var sign =  data.product_name + data.date.slice(-5,-4) + data.date.slice(-2);
+						buy_content_container += '<input type="number" id="buy_quantity' + sign + '" name="buy_quantity" step="1"/>';
+						$("#" + "BuyContainer" + sign).append(buy_content_container);
+						$("#" + "BuyContainer" + sign).append('<button type="button" id="' + 'buy_btn_'+ sign + '" pid="'+ data.pid + '" sign="'+ sign +'" buy_id="'+ uid + '">确定购买</button>');
+						document.getElementById("buy_btn_"+sign).addEventListener("click", function(e){
+							var target = e.target;
+							var pid = target.getAttribute('pid');
+							var sign = target.getAttribute('sign');
+							var quantity = document.getElementById("buy_quantity"+sign).value;
+							var buy_id = target.getAttribute('buy_id');
+							$.post("/buyProduct?pid=" + pid + "&quantity=" + quantity + "&buy_id=" + buy_id, function(data) {
+								alert(data);
+							});
 						});
+						scrollToBottom();
 					} else { //普通消息
 						$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + data.date + "</label><div class='text-success'>" + data.text + "</div></div><br>");
 						scrollToBottom();
+						if (data.from == username) {
 						$.post("/storemessage?uid=" + uid + "&text=" + data.text + "&time=" + data.date, function(data) {});
+						}
 					}
 				};
 				// 加载当前用户
