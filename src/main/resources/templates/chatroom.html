@@ -200,6 +200,7 @@ body {
 				data["text"] = $("#msg").val();
 				websocket.send(JSON.stringify(data)); // 使用 send() 方法发送数据
 				$("#msg").val("");
+				//window.location.href="/chat"
 			});
 
 			$("#bubble_btn").click(function() {

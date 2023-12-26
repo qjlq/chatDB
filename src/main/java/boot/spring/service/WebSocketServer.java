@@ -2,7 +2,10 @@ package boot.spring.service;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSON;
 
 import boot.spring.po.Message;
+import boot.spring.config.MyThreadFactory;
 
 //@Async("taskExecutor")
 @ServerEndpoint("/webSocket/{username}")
@@ -25,7 +29,7 @@ import boot.spring.po.Message;
 //@Async("taskExecutor")
 //@Async
 public class WebSocketServer {
-
+	private static final ThreadPoolExecutor pool = new ThreadPoolExecutor(10,10,10, TimeUnit.SECONDS,new ArrayBlockingQueue<>(1000),new MyThreadFactory("websocket-"));
 	// concurrent包的线程安全Set，用来存放每个客户端对应的WebSocketServer对象。
 	private static ConcurrentHashMap<String, Session> sessionPools = new ConcurrentHashMap<>();
 
@@ -91,6 +95,17 @@ public class WebSocketServer {
 	public void broadcast(String message) {
 		for (Session session : sessionPools.values()) {
 			try {
+				pool.submit(() -> {
+					//synchronized (session) {
+						//value.sendText(message);
+						try {
+							sendMessage(session, message);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					//}
+				});
 				sendMessage(session, message);
 			} catch (Exception e) {
 				e.printStackTrace();
