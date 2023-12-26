@@ -120,6 +120,8 @@ body {
 							$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + data.date + "</label><div class='text-success'>" + data.text + "下线了" + "</div></div><br>");
 							scrollToBottom();
 						}
+					}else if (data.to == 1) { //链接消息
+						$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + data.date + "</label><div class='text-success'>" + data.product_name + "</div></div><br>");
 					} else { //普通消息
 						$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + data.date + "</label><div class='text-success'>" + data.text + "</div></div><br>");
 						scrollToBottom();
@@ -137,14 +139,23 @@ body {
 				$.post("/productlist?currentuserid=" + uid, function(data) {
 					for (var i = 0; i < data.length; i++) {
 						btn_id = "link_btn" +i;
-						$("#link_list").append('<a href="#" class="list-group-item" product_name = "'+ data[i].product_name + '" id = "' + btn_id + '" picture = "' + data[i].picture + '" quantity = "' + data[i].quantity+ '" description = "' + data[i].description + '">' + data[i].product_name + '</a>');
+						$("#link_list").append('<button class="list-group-item" product_name = "'+ data[i].product_name + '" id = "' + btn_id + '" picture = "' + data[i].picture + '" quantity = "' + data[i].quantity+ '" description = "' + data[i].description + '">' + data[i].product_name + '</button>');
 						document.getElementById(btn_id).addEventListener("click", function(e){
+							var data = {};
 							var target = e.target;
-							var product_name = target.getAttribute('product_name');
-							var description = target.getAttribute('description');
-							var picture = target.getAttribute('picture');
-							var quantity = target.getAttribute('quantity');
-							var price = target.getAttribute('price');
+							window.alert(target.getAttribute('product_name'));
+							window.alert(target.getAttribute('description'));
+							window.alert(target.getAttribute('picture'));
+							window.alert(target.getAttribute('quantity'));
+							window.alert(target.getAttribute('price'));
+							data["from"] = username;
+							data["to"] = 1;
+							data["product_name"] = target.getAttribute('product_name');
+							data["description"] = target.getAttribute('description');
+							data["picture"] = target.getAttribute('picture');
+							data["quantity"] = target.getAttribute('quantity');
+							data["price"] = target.getAttribute('price');
+							websocket.send(JSON.stringify(data)); // 使用 send() 方法发送数据
 						});
 					}
 				});
