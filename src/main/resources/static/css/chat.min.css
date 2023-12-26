@@ -7340,3 +7340,33 @@ button.close {
     background-color:rgba(0, 74, 163, 1);
     transition:all 0.8s;
 }
+
+
+.BuyDiv{
+    position:relative;
+    margin-top: -142px;
+    left:18%;
+}
+
+.BuyDiv button{
+    position:relative;
+}
+
+.textDiv {
+    padding:15px 20px;
+    margin: 0px 15px;
+    background-color: rgba(255, 255, 255, 0.55);
+    border-radius: 25px;
+    height:250px;
+}
+
+.textDiv_div{
+    position: relative;
+    margin:8px;
+    margin-top:35px;
+}
+
+.textDiv img{
+    margin:20px;
+    border-radius: 15px;
+}
