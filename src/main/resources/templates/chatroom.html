@@ -153,7 +153,7 @@ body {
 						$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + data.date + "</label><div class='text-success'>" + data.text + "</div></div><br>");
 						scrollToBottom();
 						if (data.from == username) {
-						$.post("/storemessage?uid=" + uid + "&text=" + data.text + "&time=" + data.date, function(data) {});
+							$.post("/storemessage?uid=" + uid + "&text=" + data.text + "&time=" + data.date, function(data) {});
 						}
 					}
 				};

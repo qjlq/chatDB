@@ -2,8 +2,11 @@ package boot.spring.po;
 
 import java.util.Date;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.scheduling.annotation.Async;
 
+import com.alibaba.fastjson.annotation.JSONField;
+//@Async("taskExecutor")
+//@Async
 public class Message {
 
 	// 发送者name

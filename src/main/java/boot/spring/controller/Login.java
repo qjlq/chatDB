@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import boot.spring.utils.ValidateImageCodeUtils;
+
+import org.springframework.scheduling.annotation.Async;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,16 +18,19 @@ import boot.spring.service.LoginService;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
-
+//@Async("taskExecutor")
 @Controller
 public class Login {
 	@Resource
 	LoginService loginservice; // 调用boot.spring.service.LoginService接口
 
 	// 接收在login的html上登录的username和password
+	//@Async("taskExecutor")
 	@RequestMapping("/loginvalidate")
 	// @RequestParam是将请求参数绑定到控制器的方法参数上
 	public String loginvalidate(@RequestParam("username") String username, @RequestParam("password") String pwd,

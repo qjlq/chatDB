@@ -12,14 +12,18 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 
 import boot.spring.po.Message;
 
+//@Async("taskExecutor")
 @ServerEndpoint("/webSocket/{username}")
 @Component
+//@Async("taskExecutor")
+//@Async
 public class WebSocketServer {
 
 	// concurrent包的线程安全Set，用来存放每个客户端对应的WebSocketServer对象。
@@ -54,6 +58,7 @@ public class WebSocketServer {
 
 	// 收到客户端信息后，根据接收人的username把消息推下去或者群发
 	// to=-1群发消息
+
 	@OnMessage
 	public void onMessage(String message) throws IOException {
 		Message msg = JSON.parseObject(message, Message.class);
@@ -82,6 +87,7 @@ public class WebSocketServer {
 	}
 
 	// 群发消息
+	//@Async("taskExecutor")
 	public void broadcast(String message) {
 		for (Session session : sessionPools.values()) {
 			try {
