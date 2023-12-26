@@ -47,6 +47,7 @@ public class Login {
 				httpSession.setAttribute("user", user);
 				return "chatroom"; // 进入到这个html上
 			}else if(login != null && login.getIs_admin() == 1 && login.getIs_delete() == 0){
+				httpSession.setAttribute("user", user);
 				httpSession.setAttribute("manager", login);
 				System.out.println("管理员登录成功");
 				return "redirect:/emp/findAll";
