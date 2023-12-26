@@ -18,9 +18,9 @@ public class MyMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
+        String filePath = System.getProperty("user.dir") + "/src/main/resources/static/orderPicture/";
         //配置server虚拟路径，handler为前台访问的目录，locations为files相对应的本地路径
-        registry.addResourceHandler("/test/**").addResourceLocations("file:D:\\test\\");
+        registry.addResourceHandler("/orderPicture/**").addResourceLocations("file:"+filePath);
     }
 
 }
