@@ -9,10 +9,7 @@ import javax.servlet.http.HttpSession;
 import boot.spring.utils.ValidateImageCodeUtils;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import boot.spring.po.User;
 import boot.spring.service.LoginService;
@@ -50,7 +47,7 @@ public class Login {
 				httpSession.setAttribute("user", user);
 				httpSession.setAttribute("manager", login);
 				System.out.println("管理员登录成功");
-				return "redirect:/emp/findAll";
+				return "redirect:emp/findAll";
 			} else if (realpwd == null) {
 				return "userNull";
 			} else {
@@ -75,9 +72,9 @@ public class Login {
 			System.out.println(user);
 			loginservice.register(user); // 注册
 			System.out.println("注册成功");
-			return "redirect:/index"; // 注册成功跳转到登录界面
+			return "redirect:index"; // 注册成功跳转到登录界面
 		} else { // 输入错误
-			return "redirect:/toRegisterHint"; // 注册失败跳转到注册提示语句
+			return "redirect:toRegisterHint"; // 注册失败跳转到注册提示语句
 		}
 	}
 
