@@ -6,7 +6,7 @@
         2.parameterType必须和接口方法参数一致
     -->
     <insert id="setProduct" parameterType="boot.spring.po.Product">
-        insert into product values (#{pid}, #{product_name}, #{description}, #{picture}, #{quantity}, #{price});
+        insert into product values (#{pid}, #{product_name}, #{description}, #{picture}, #{quantity}, #{price},'Y');
         insert into link values (#{lid}, #{pid}, #{uid});
     </insert>
      <!--从数据库中获取信息给po.product文件-->
