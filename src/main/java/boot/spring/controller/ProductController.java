@@ -1,7 +1,10 @@
 package boot.spring.controller;
 
 import boot.spring.po.Product;
+import boot.spring.service.OrderService;
 import boot.spring.service.ProductService;
+import boot.spring.service.SellOrderService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +27,25 @@ import java.util.UUID;
 public class ProductController {
     @Resource
     ProductService productService;
+    @Resource
+    SellOrderService sellOrderService;
 
     @RequestMapping("/deleteproduct")
     @ResponseBody
-    public  void deleteproduct(String pid, HttpSession httpSession) {
+    public void deleteproduct(String pid, HttpSession httpSession) {
         productService.deleteProduct(pid);
+    }
+
+    @RequestMapping("/sendOrder")
+    @ResponseBody
+    public void sendOrder(String oid, HttpSession httpSession) {
+        sellOrderService.sendOrderByoid(oid);
+    }
+
+    @RequestMapping("/receivedOrder")
+    @ResponseBody
+    public void receivedOrder(String oid, HttpSession httpSession) {
+       sellOrderService.receivedOrderByoid(oid);
     }
 
     //文件上传

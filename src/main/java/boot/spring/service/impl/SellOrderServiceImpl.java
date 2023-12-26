@@ -24,4 +24,13 @@ public class SellOrderServiceImpl implements SellOrderService{
         List<SellOrder> sellOrders = sellOrderMapper.getSellOrderByUid(uid);
         return sellOrders;
     }
+
+    @Override
+    public void sendOrderByoid(String oid) {
+        sellOrderMapper.sendOrder(oid);
+    }
+    @Override
+    public void receivedOrderByoid(String oid) {
+        sellOrderMapper.receivedOrder(oid);
+    }
 }
