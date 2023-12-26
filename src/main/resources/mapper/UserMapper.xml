@@ -10,7 +10,7 @@
 	<!--从数据库中获取名字给getpwdbyname-->
 	<select id="getpwdbyname" parameterType="String"
 		resultMap="userMap">
-		select uid, username, password, sex, phone,is_admin, is_delete, create_time from user where username=#{username}
+		select uid, username, password, sex, phone,is_admin, is_delete, create_time,money,address from user where username=#{username}
 	</select>
 
 	<!--注册-->
@@ -18,7 +18,7 @@
         2.parameterType必须和接口方法参数一致
     -->
 	<insert id="save" parameterType="boot.spring.po.User">
-		insert into user values (#{uid}, #{username}, #{password}, #{sex}, #{phone}, #{is_admin}, #{is_delete}, #{create_time}, 10000)
+		insert into user values (#{uid}, #{username}, #{password}, #{sex}, #{phone}, #{is_admin}, #{is_delete}, #{create_time}, 1000, #{address})
 	</insert>
 
 	<select id="selectId" parameterType="String" resultType="String">
@@ -27,7 +27,7 @@
 
 	<!--管理员登录-->
 	<select id="ManageLogin" resultType="boot.spring.po.User">
-		select uid, username, password, sex, phone,is_admin, is_delete, create_time from user
+		select uid, username, password, sex, phone,is_admin, is_delete, create_time,money,address from user
 		where username=#{username} and password=#{password}
 	</select>
 

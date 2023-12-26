@@ -21,7 +21,7 @@ CREATE TABLE chat(
 	cid VARCHAR(40) PRIMARY KEY,
 	uid VARCHAR(40),
 	chat_data VARCHAR(300),
-	chat_time VARCHAR(32)
+	chat_time VARCHAR(32),
 -- 	FOREIGN KEY (uid) REFERENCES `user`(uid)
 )CHARSET=utf8;
 
@@ -31,7 +31,9 @@ CREATE TABLE product(
 	description VARCHAR(80),
 	picture VARCHAR(80),
 	quantity INT CHECK(quantity >= 0),
-	price DECIMAL CHECK(price >= 0)
+	price DECIMAL CHECK(price >= 0),
+	addres  VARCHAR(80)
+	Statust char(1) CHECK((Statust='Y') OR (Statust='N')) NOT NULL,
 )CHARSET=utf8;
 
 CREATE TABLE link(

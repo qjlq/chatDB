@@ -95,7 +95,6 @@ public class empController {
         user.setIs_delete(user2.getIs_delete());
         user.setCreate_time(user2.getCreate_time());
         user.setUid(user2.getUid());
-        user.setMoney(user2.getMoney());
         if (user.getPhone().length() == 11 ) {
             empService.update(user);
             return "redirect:/emp/findAll";

@@ -191,6 +191,7 @@
                     <th class="wid2">删除</th>
                     <th>创建时间</th>
                     <th>余额</th>
+                    <th>地址</th>
                     <th class="wid1">功能</th>
                 </tr>
                 <tr th:each="emp: ${users}">
@@ -203,6 +204,7 @@
                     <td class="wid2" th:text="${emp.is_delete}"/></td>
                     <td th:text="${emp.create_time}"/></td>
                     <td th:text="${emp.money}"/></td>
+                    <td th:text="${emp.address}"/></td>
                     <td class="wid1"><a th:href="@{/emp/find(username=${emp.username})}">修改用户</a></td>
                 </tr>
             </table>

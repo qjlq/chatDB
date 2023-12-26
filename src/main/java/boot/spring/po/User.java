@@ -12,6 +12,7 @@ public class User {
 	private String create_time;
 
 	private Float money;
+	private String address;
 
 	public User() {
 	}
@@ -21,7 +22,7 @@ public class User {
 		this.username = username;
 	}
 
-	public User(String uid, String username, String password, String sex, String phone, int is_admin, int is_delete, String create_time, Float money) {
+	public User(String uid, String username, String password, String sex, String phone, int is_admin, int is_delete, String create_time, Float money, String address) {
 		this.uid = uid;
 		this.username = username;
 		this.password = password;
@@ -31,6 +32,7 @@ public class User {
 		this.is_delete = is_delete;
 		this.create_time = create_time;
 		this.money = money;
+		this.address = address;
 	}
 
 	public Float getMoney() {
@@ -105,6 +107,13 @@ public class User {
 		this.create_time = create_time;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	@Override
 	public String toString() {
@@ -118,6 +127,7 @@ public class User {
 				", is_delete=" + is_delete +
 				", create_time='" + create_time + '\'' +
 				", money=" + money +
+				", address='" + address + '\'' +
 				'}';
 	}
 }
