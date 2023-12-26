@@ -143,7 +143,9 @@ body {
 					} else { //普通消息
 						$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + data.date + "</label><div class='text-success'>" + data.text + "</div></div><br>");
 						scrollToBottom();
-						$.post("/storemessage?uid=" + uid + "&text=" + data.text + "&time=" + data.date, function(data) {});
+						if (data.from == username) {
+							$.post("/storemessage?uid=" + uid + "&text=" + data.text + "&time=" + data.date, function(data) {});
+						}
 					}
 				};
 				// 加载当前用户
