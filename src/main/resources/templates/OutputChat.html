@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="/css/OutputChat.css"/>
     <link rel="stylesheet" type="text/css" href="/css/chat.min.css"/>
   <script th:src="@{/js/axios.min.js}"></script>
+  <script src="./js/jquery-1.12.3.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
 </head>
 <script>
         function menu_active(ulId){
@@ -16,7 +18,18 @@
             }else{
                 ulId.style.display = "none"
             } 
-        } 
+        }
+        var uid;
+        $(document).ready(function() { //调用失败
+            $.get("/currentuser", function(data) {
+                uid = data.uid;
+                window.alert(uid);       
+                if (uid == undefined){
+                    window.alert("please login");
+                    window.location.href="/";
+                }
+            });
+        });   
 </script>
 <body>
 <div class="topnav">
@@ -56,7 +69,7 @@
 
     </div>
 </div>
-    <script>
+    <!-- <script>
 		var uid;
         $(document).ready(function() { //调用失败
             $.get("/currentuser", function(data) {
@@ -68,6 +81,6 @@
                 }
             });
         });  
-    </script>
+    </script> -->
 </body>
 </html>
