@@ -23,9 +23,14 @@
             resultMap="productMap">
         SELECT product.pid, product.product_name, product.picture, product.description, product.quantity, product.price
         FROM product,link
-        WHERE link.pid = product.pid AND sell_uid = #{userid};
+        WHERE link.pid = product.pid AND sell_uid = #{userid} AND product.Statust like 'Y';
         SELECT `order`.Status
         FROM `order`,product,link
-        WHERE link.pid = product.pid AND `order`.lid = link.lid AND sell_uid = #{userid} AND product.Statust like 'Y';
+        WHERE link.pid = product.pid AND `order`.lid = link.lid AND sell_uid = #{userid};
     </select>
+    <insert id="deleteProduct" parameterType="boot.spring.po.Product">
+        UPDATE product
+        set product.Statust = 'N'
+        WHERE product.pid = #{pid}
+    </insert>
 </mapper>

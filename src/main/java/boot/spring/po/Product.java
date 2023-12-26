@@ -14,6 +14,7 @@ public class Product {
     public String lid;
     public String uid;
     public String Status;
+    public String Statust;
     public Product() {
     }
 

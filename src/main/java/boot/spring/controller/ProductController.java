@@ -12,9 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.io.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -22,6 +25,11 @@ public class ProductController {
     @Resource
     ProductService productService;
 
+    @RequestMapping("/deleteproduct")
+    @ResponseBody
+    public  void deleteproduct(String pid, HttpSession httpSession) {
+        productService.deleteProduct(pid);
+    }
 
     //文件上传
     @RequestMapping("/upload")

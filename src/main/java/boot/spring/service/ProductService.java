@@ -15,6 +15,7 @@ import java.util.List;
 public interface ProductService {
     //存商品信息
     void saveProduct(Product product);
+    void deleteProduct(String pid);
     List<Product> getHistoryByUid(String Uid);
 
 }
