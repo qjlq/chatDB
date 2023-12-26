@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.scheduling.annotation.Async;
 
 import com.alibaba.fastjson.annotation.JSONField;
-@Async("taskExecutor")
+//@Async("taskExecutor")
 //@Async
 public class Message {
 
