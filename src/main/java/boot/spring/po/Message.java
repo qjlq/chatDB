@@ -8,7 +8,7 @@ public class Message {
 
 	// 发送者name
 	public String from;
-	// 接收者name 0上线消息 -1给所有人 -2下线消息
+	// 接收者name 0上线消息 -1给所有人 -2下线消息 1链接信息
 	public String to;
 	// 发送的文本
 	public String text;
@@ -16,8 +16,11 @@ public class Message {
 	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	public Date date;
 
-
-
+	public String product_name;
+	public String description;
+	public String picture;
+	public String quantity;
+	public String price;
 
 
 	public String getFrom() {

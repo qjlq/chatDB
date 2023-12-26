@@ -58,8 +58,8 @@ public class WebSocketServer {
 	public void onMessage(String message) throws IOException {
 		Message msg = JSON.parseObject(message, Message.class);
 		msg.setDate(new Date());
-		if (msg.getTo().equals("-1")) {
-			broadcast(JSON.toJSONString(msg, true)); // -1群发
+		if (msg.getTo().equals("-1") || msg.getTo().equals("1")) {
+			broadcast(JSON.toJSONString(msg, true)); // -1群发, 1链接
 		} else {
 			sendInfo(msg.getTo(), JSON.toJSONString(msg, true));
 		}
