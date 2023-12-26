@@ -33,7 +33,6 @@ CREATE TABLE product(
 	picture VARCHAR(80),
 	quantity INT CHECK(quantity >= 0),
 	price DECIMAL CHECK(price >= 0),
-	`address`  VARCHAR(80),
 	Statust char(1) CHECK((Statust='Y') OR (Statust='N')) NOT NULL
 )CHARSET=utf8;
 

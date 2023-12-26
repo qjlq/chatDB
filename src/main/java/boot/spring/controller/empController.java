@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-
 @Controller
 @RequestMapping("/emp")
 public class empController {
@@ -23,7 +22,7 @@ public class empController {
     @Resource
     private LoginService userService;
 
-    //界面登录
+    // 界面登录
     @RequestMapping("/findAll")
     public String findAll(Model model) {
         List<User> user = empService.findAll();
@@ -31,90 +30,109 @@ public class empController {
         return "ManageUser";
     }
 
-    //界面登录
+    // 界面登录
     @GetMapping("userIn")
-    public String userIn(){
+    public String userIn() {
         return "redirect:findAll";
     }
 
-    //增加
+    // 增加
     @GetMapping("/toAdd")
-    public String toAdd(){
+    public String toAdd() {
         return "addEmp";
     }
 
-    //增加
+    // 增加
     @PostMapping("/addEmp")
-    public String addEmp(User user, HttpSession session){
-        if(user.getPhone().length() == 11) {
+    public String addEmp(User user, HttpSession session) {
+        if (user.getPhone().length() == 11) {
             Date date = new Date();
-            SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :HH:mm:ss");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd :HH:mm:ss");
             user.setCreate_time(dateFormat.format(date));
-            user.setUid(UUID.randomUUID().toString());   //是javaJDK提供的一个自动生成主键的方法
+            user.setUid(UUID.randomUUID().toString()); // 是javaJDK提供的一个自动生成主键的方法
             empService.add(user);
             return "redirect:findAll";
-        }else {
+        } else {
             return "addHint";
         }
     }
 
-    //删除
+    // 删除
     @GetMapping("/Delete")
-    public String Delete(){
+    public String Delete() {
         return "delete";
     }
 
     @PostMapping("/delete")
-    public String delete(String user_name, HttpSession session){
-        User user = empService.seek(user_name);
-        User user1 = (User) session.getAttribute("manager");
-        if (!user1.getUid().equals(user.getUid()) && user.getIs_delete() == 0) {
-            user.setIs_delete(1);
-            empService.update(user);
-            return "redirect:findAll";
-        }else {
+    public String delete(String user_name, HttpSession session) {
+        try {
+            User user = empService.seek(user_name);
+            User user1 = (User) session.getAttribute("manager");
+            if (!user1.getUid().equals(user.getUid()) && user.getIs_delete() == 0) {
+                user.setIs_delete(1);
+                empService.update(user);
+                return "redirect:findAll";
+            } else {
+                return "deleteHint";
+            }
+        } catch (Exception e) {
             return "deleteHint";
         }
+
     }
 
-    //修改用户
+    // 修改用户
     @GetMapping("/find")
-    public String find(String username, Model model){
-        User user = empService.find(username);
-        if (user.getIs_delete() == 0) {
-            model.addAttribute("user", user);
-            return "updateEmp";
-        }else {
+    public String find(String username, Model model) {
+        try {
+            User user = empService.find(username);
+            if (user.getIs_delete() == 0) {
+                model.addAttribute("user", user);
+                return "updateEmp";
+            } else {
+                return "myselfHint";
+            }
+        } catch (Exception e) {
             return "myselfHint";
         }
+
     }
 
-    //更新修改用户
+    // 更新修改用户
     @PostMapping("/update")
-    public String update(User user, Model model, HttpSession session){
-        User user2 = empService.seek(user.getUsername());
-        user.setIs_delete(user2.getIs_delete());
-        user.setCreate_time(user2.getCreate_time());
-        user.setUid(user2.getUid());
-        if (user.getPhone().length() == 11 ) {
-            empService.update(user);
-            return "redirect:findAll";
-        }else {
-            model.addAttribute("user", user);
+    public String update(User user, Model model, HttpSession session) {
+        try {
+            User user2 = empService.seek(user.getUsername());
+            user.setIs_delete(user2.getIs_delete());
+            user.setCreate_time(user2.getCreate_time());
+            user.setUid(user2.getUid());
+            if (user.getPhone().length() == 11) {
+                empService.update(user);
+                return "redirect:findAll";
+            } else {
+                model.addAttribute("user", user);
+                return "updateHint";
+            }
+        } catch (Exception e) {
             return "updateHint";
         }
+
     }
 
-    //查找
+    // 查找
     @PostMapping("/seek")
-    public String seek(String username, Model model){
-        User user = empService.seek(username);
-        if (user != null && user.getIs_delete() == 0){
-            model.addAttribute("user",user);
-            return "seekDate";
-        }else {
+    public String seek(String username, Model model) {
+        try {
+            User user = empService.seek(username);
+            if (user != null && user.getIs_delete() == 0) {
+                model.addAttribute("user", user);
+                return "seekDate";
+            } else {
+                return "seekHint";
+            }
+        } catch (Exception e) {
             return "seekHint";
         }
+
     }
 }
-
