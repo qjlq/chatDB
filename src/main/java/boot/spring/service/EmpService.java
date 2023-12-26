@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+//@Async("taskExecutor")
 @Service
 @Component
-@Async
+//@Async
 public interface EmpService {
     List<User> findAll();
     void add(User user);

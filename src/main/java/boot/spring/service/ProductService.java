@@ -13,7 +13,8 @@ import java.util.List;
 
 @Service
 @Component
-@Async
+@Async("taskExecutor")
+//@Async
 public interface ProductService {
     //存商品信息
     void saveProduct(Product product);
