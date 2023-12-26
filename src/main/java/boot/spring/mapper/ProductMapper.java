@@ -10,5 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ProductMapper {
 
     void setProduct(Product product);
+    void deleteProduct(String pid);
     List<Product> getProductByUid(String uid);
 }

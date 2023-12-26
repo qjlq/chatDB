@@ -84,21 +84,18 @@
                                   var target = e.target;
                                   //var index = target.id.slice(-1);
                                   var t = target.getAttribute("pid");
-                                  window.alert(t);
+                                  // window.alert(t);
+                                  $.post("/deleteproduct?pid="+t, function(data) {
+                                    window.alert(t);
+                                    window.location.href="/myProduct";
+                                  })
                                   $.get("/currentuser", function(data) {
-                                    username = data.username;
                                     uid = data.uid;
-                                  if (uid != undefined){
-                                    document.getElementById("form_uid").setAttribute("value", uid);
-            $("#publish-form").ajaxSubmit(function (data) {
-                alert(data);
-                window.location.href="/chat";
-            });
-        }
-        else{
-            window.alert("please login");
-            window.location.href="/";
-        } 
+                                  if (uid == undefined){
+                                    window.alert("please login");
+          			                    window.location.href="/";
+                                  }
+ 
                                   })
                                   // document.getElementById('myBtnReceive' + index).className += " myBtnReceiveHidden";
 

@@ -34,6 +34,11 @@ public class ProductServicelmpl implements ProductService{
         public void saveProduct(Product product) {
             productMapper.setProduct(product);
         }
+
+        @Override
+        public void deleteProduct(String pid) {
+            productMapper.deleteProduct(pid);
+        }
 }
 
 
