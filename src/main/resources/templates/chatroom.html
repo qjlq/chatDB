@@ -132,6 +132,22 @@ body {
 						$("#users").append('<a href="#" onclick="talk(this)" class="list-group-item">' + data[i] + '</a>');
 					}
 				});
+
+				//加载用户的商品链接
+				$.post("/productlist?currentuserid=" + uid, function(data) {
+					for (var i = 0; i < data.length; i++) {
+						btn_id = "link_btn" +i;
+						$("#link_list").append('<a href="#" class="list-group-item" product_name = "'+ data[i].product_name + '" id = "' + btn_id + '" picture = "' + data[i].picture + '" quantity = "' + data[i].quantity+ '" description = "' + data[i].description + '">' + data[i].product_name + '</a>');
+						document.getElementById(btn_id).addEventListener("click", function(e){
+							var target = e.target;
+							var product_name = target.getAttribute('product_name');
+							var description = target.getAttribute('description');
+							var picture = target.getAttribute('picture');
+							var quantity = target.getAttribute('quantity');
+							var price = target.getAttribute('price');
+						});
+					}
+				});
 			});
 	
 			// 发送
@@ -167,20 +183,8 @@ body {
 
 			// 发送商品按钮
 			$("#show_product").click(function() {
-				$.post("/productlist?currentuserid=" + uid, function(data) {
-					for (var i = 0; i < data.length; i++) {
-						btn_id = "link_btn" +i;
-						$("#link_list").append('<a href="#" class="list-group-item" product_name = "'+ data[i].product_name + '" id = "' + btn_id + '" picture = "' + data[i].picture + '" quantity = "' + data[i].quantity+ '" description = "' + data[i].description + '">' + data[i].product_name + '</a>');
-						document.getElementById(btn_id).addEventListener("click", function(e){
-							var target = e.target;
-							var product_name = target.getAttribute('product_name');
-							var description = target.getAttribute('description');
-							var picture = target.getAttribute('picture');
-							var quantity = target.getAttribute('quantity');
-							var price = target.getAttribute('price');
-						});
-					}
-				});
+				document.getElementById("link_container").style.visibility = "visible";
+				document.getElementById("link_container").style.opacity = "1";
 			});
 		});
 	
@@ -215,6 +219,12 @@ body {
 			}
 			return fmt;
 		}
+
+		function close_container(){
+			document.getElementById("link_container").style.visibility = "hidden";
+			document.getElementById("link_container").style.opacity = "0";
+		}
+		document.getElementById("close_btn").addEventListener("click",close_container);
 	</script>
 
 </body>

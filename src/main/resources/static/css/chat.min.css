@@ -7302,6 +7302,9 @@ button.close {
     top:350px;
     color:white;
     border-radius:0px 0px 25px 25px;
+    visibility:hidden;
+    opacity:0;
+    transition: 1s;
 }
 
 #link-title{
