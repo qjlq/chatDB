@@ -11,5 +11,6 @@
     <select id="findAllUser" resultType="boot.spring.po.OutputChat">
         select cid, uid, chat_data, chat_time
         from chat
+        order by chat.chat_time ;
     </select>
 </mapper>
